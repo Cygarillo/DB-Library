@@ -51,7 +51,7 @@ public class Vertrag implements Serializable {
     private Date startdatum;
     @Basic(optional = false)
     @Column(name = "AKTIV")
-    private Serializable aktiv;
+    private boolean aktiv;
     @Column(name = "SPEZIALPREIS")
     private Integer spezialpreis;
     @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
@@ -73,7 +73,7 @@ public class Vertrag implements Serializable {
         this.id = id;
     }
 
-    public Vertrag(Integer id, Date startdatum, Serializable aktiv) {
+    public Vertrag(Integer id, Date startdatum, boolean aktiv) {
         this.id = id;
         this.startdatum = startdatum;
         this.aktiv = aktiv;
@@ -95,11 +95,11 @@ public class Vertrag implements Serializable {
         this.startdatum = startdatum;
     }
 
-    public Serializable getAktiv() {
+    public boolean getAktiv() {
         return aktiv;
     }
 
-    public void setAktiv(Serializable aktiv) {
+    public void setAktiv(boolean aktiv) {
         this.aktiv = aktiv;
     }
 

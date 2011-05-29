@@ -114,7 +114,7 @@ public class Zahlungsintervall implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.skema.data.Zahlungsintervall[ id=" + id + " ]";
+        return beschreibung;
     }
     
 }
