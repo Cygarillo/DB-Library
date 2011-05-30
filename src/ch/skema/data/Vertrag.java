@@ -35,8 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Vertrag.findAll", query = "SELECT v FROM Vertrag v"),
     @NamedQuery(name = "Vertrag.findById", query = "SELECT v FROM Vertrag v WHERE v.id = :id"),
+    @NamedQuery(name = "Vertrag.findByMitgliedId", query = "SELECT v FROM Vertrag v WHERE v.mitgliederid = :id"),
     @NamedQuery(name = "Vertrag.findByStartdatum", query = "SELECT v FROM Vertrag v WHERE v.startdatum = :startdatum"),
     @NamedQuery(name = "Vertrag.findByAktiv", query = "SELECT v FROM Vertrag v WHERE v.aktiv = :aktiv"),
+    @NamedQuery(name = "Vertrag.findByAktivAndMitgliederId", query = "SELECT v FROM Vertrag v WHERE v.aktiv = :aktiv and v.mitgliederid = :id"),
     @NamedQuery(name = "Vertrag.findBySpezialpreis", query = "SELECT v FROM Vertrag v WHERE v.spezialpreis = :spezialpreis")})
 public class Vertrag implements Serializable {
     private static final long serialVersionUID = 1L;
