@@ -65,8 +65,6 @@ public class Vertrag implements Serializable {
     @JoinColumn(name = "MITGLIEDERID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Mitglied mitgliederid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vertragid")
-    private Collection<Vertragsstop> vertragsstopCollection;
 
     public Vertrag() {
     }
@@ -137,14 +135,6 @@ public class Vertrag implements Serializable {
         this.mitgliederid = mitgliederid;
     }
 
-    @XmlTransient
-    public Collection<Vertragsstop> getVertragsstopCollection() {
-        return vertragsstopCollection;
-    }
-
-    public void setVertragsstopCollection(Collection<Vertragsstop> vertragsstopCollection) {
-        this.vertragsstopCollection = vertragsstopCollection;
-    }
 
     @Override
     public int hashCode() {
