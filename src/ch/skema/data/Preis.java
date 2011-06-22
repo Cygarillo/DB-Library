@@ -5,7 +5,6 @@
 package ch.skema.data;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,24 +13,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Cyrill
  */
 @Entity
-@Table(name = "PREISALLGEMEIN", catalog = "MITGLIEDERDB", schema = "PUBLIC")
+@Table(name = "PREIS")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Preisallgemein.findAll", query = "SELECT p FROM Preisallgemein p"),
-    @NamedQuery(name = "Preisallgemein.findById", query = "SELECT p FROM Preisallgemein p WHERE p.id = :id"),
-    @NamedQuery(name = "Preisallgemein.findByBeschreibung", query = "SELECT p FROM Preisallgemein p WHERE p.beschreibung = :beschreibung"),
-    @NamedQuery(name = "Preisallgemein.findByPreis", query = "SELECT p FROM Preisallgemein p WHERE p.preis = :preis")})
-public class Preisallgemein implements Serializable {
+    @NamedQuery(name = "Preis.findAll", query = "SELECT p FROM Preis p"),
+    @NamedQuery(name = "Preis.findById", query = "SELECT p FROM Preis p WHERE p.id = :id"),
+    @NamedQuery(name = "Preis.findByPreis", query = "SELECT p FROM Preis p WHERE p.preis = :preis"),
+    @NamedQuery(name = "Preis.findByBeschreibung", query = "SELECT p FROM Preis p WHERE p.beschreibung = :beschreibung")})
+public class Preis implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,24 +36,20 @@ public class Preisallgemein implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "BESCHREIBUNG")
-    private String beschreibung;
-    @Basic(optional = false)
     @Column(name = "PREIS")
     private int preis;
-    @OneToMany(mappedBy = "preisallgemeinid")
-    private Collection<Rechnungsinhalt> rechnungsinhaltCollection;
+    @Column(name = "BESCHREIBUNG")
+    private String beschreibung;
 
-    public Preisallgemein() {
+    public Preis() {
     }
 
-    public Preisallgemein(Integer id) {
+    public Preis(Integer id) {
         this.id = id;
     }
 
-    public Preisallgemein(Integer id, String beschreibung, int preis) {
+    public Preis(Integer id, int preis) {
         this.id = id;
-        this.beschreibung = beschreibung;
         this.preis = preis;
     }
 
@@ -68,14 +61,6 @@ public class Preisallgemein implements Serializable {
         this.id = id;
     }
 
-    public String getBeschreibung() {
-        return beschreibung;
-    }
-
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
-    }
-
     public int getPreis() {
         return preis;
     }
@@ -84,13 +69,12 @@ public class Preisallgemein implements Serializable {
         this.preis = preis;
     }
 
-    @XmlTransient
-    public Collection<Rechnungsinhalt> getRechnungsinhaltCollection() {
-        return rechnungsinhaltCollection;
+    public String getBeschreibung() {
+        return beschreibung;
     }
 
-    public void setRechnungsinhaltCollection(Collection<Rechnungsinhalt> rechnungsinhaltCollection) {
-        this.rechnungsinhaltCollection = rechnungsinhaltCollection;
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
     }
 
     @Override
@@ -103,10 +87,10 @@ public class Preisallgemein implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Preisallgemein)) {
+        if (!(object instanceof Preis)) {
             return false;
         }
-        Preisallgemein other = (Preisallgemein) object;
+        Preis other = (Preis) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -115,7 +99,7 @@ public class Preisallgemein implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.skema.data.Preisallgemein[ id=" + id + " ]";
+        return "ch.skema.data.Preis[ id=" + id + " ]";
     }
     
 }

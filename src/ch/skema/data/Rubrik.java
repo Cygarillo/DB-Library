@@ -5,9 +5,7 @@
 package ch.skema.data;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,17 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Cyrill
  */
 @Entity
-@Table(name = "RUBRIK", catalog = "MITGLIEDERDB", schema = "PUBLIC")
+@Table(name = "RUBRIK")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rubrik.findAll", query = "SELECT r FROM Rubrik r"),
@@ -44,12 +40,6 @@ public class Rubrik implements Serializable {
     private String beschreibung;
     @Column(name = "KURZFORM")
     private String kurzform;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubrikid")
-    private Collection<Vertrag> vertragCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubrikid")
-    private Collection<Preisvertrag> preisvertragCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubrikid")
-    private Collection<Pruefungslevel> pruefungslevelCollection;
 
     public Rubrik() {
     }
@@ -85,33 +75,6 @@ public class Rubrik implements Serializable {
 
     public void setKurzform(String kurzform) {
         this.kurzform = kurzform;
-    }
-
-    @XmlTransient
-    public Collection<Vertrag> getVertragCollection() {
-        return vertragCollection;
-    }
-
-    public void setVertragCollection(Collection<Vertrag> vertragCollection) {
-        this.vertragCollection = vertragCollection;
-    }
-
-    @XmlTransient
-    public Collection<Preisvertrag> getPreisvertragCollection() {
-        return preisvertragCollection;
-    }
-
-    public void setPreisvertragCollection(Collection<Preisvertrag> preisvertragCollection) {
-        this.preisvertragCollection = preisvertragCollection;
-    }
-
-    @XmlTransient
-    public Collection<Pruefungslevel> getPruefungslevelCollection() {
-        return pruefungslevelCollection;
-    }
-
-    public void setPruefungslevelCollection(Collection<Pruefungslevel> pruefungslevelCollection) {
-        this.pruefungslevelCollection = pruefungslevelCollection;
     }
 
     @Override

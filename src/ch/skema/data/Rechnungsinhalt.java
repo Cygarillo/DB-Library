@@ -23,27 +23,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Cyrill
  */
 @Entity
-@Table(name = "RECHNUNGSINHALT", catalog = "MITGLIEDERDB", schema = "PUBLIC")
+@Table(name = "RECHNUNGSINHALT")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rechnungsinhalt.findAll", query = "SELECT r FROM Rechnungsinhalt r"),
     @NamedQuery(name = "Rechnungsinhalt.findById", query = "SELECT r FROM Rechnungsinhalt r WHERE r.id = :id")})
 public class Rechnungsinhalt implements Serializable {
+    @JoinColumn(name = "RECHNUNGID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Rechnung rechnungid;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @JoinColumn(name = "RECHNUNGID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Rechnung rechnungid;
-    @JoinColumn(name = "PREISVERTRAGID", referencedColumnName = "ID")
-    @ManyToOne
-    private Preisvertrag preisvertragid;
-    @JoinColumn(name = "PREISALLGEMEINID", referencedColumnName = "ID")
-    @ManyToOne
-    private Preisallgemein preisallgemeinid;
 
     public Rechnungsinhalt() {
     }
@@ -58,30 +52,6 @@ public class Rechnungsinhalt implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Rechnung getRechnungid() {
-        return rechnungid;
-    }
-
-    public void setRechnungid(Rechnung rechnungid) {
-        this.rechnungid = rechnungid;
-    }
-
-    public Preisvertrag getPreisvertragid() {
-        return preisvertragid;
-    }
-
-    public void setPreisvertragid(Preisvertrag preisvertragid) {
-        this.preisvertragid = preisvertragid;
-    }
-
-    public Preisallgemein getPreisallgemeinid() {
-        return preisallgemeinid;
-    }
-
-    public void setPreisallgemeinid(Preisallgemein preisallgemeinid) {
-        this.preisallgemeinid = preisallgemeinid;
     }
 
     @Override
@@ -107,6 +77,14 @@ public class Rechnungsinhalt implements Serializable {
     @Override
     public String toString() {
         return "ch.skema.data.Rechnungsinhalt[ id=" + id + " ]";
+    }
+
+    public Rechnung getRechnungid() {
+        return rechnungid;
+    }
+
+    public void setRechnungid(Rechnung rechnungid) {
+        this.rechnungid = rechnungid;
     }
     
 }

@@ -17,8 +17,9 @@
     <class>ch.skema.data.Vertragsstop</class>
     <class>ch.skema.data.Vertrag</class>
     <class>ch.skema.data.Pruefung</class>
+    <class>ch.skema.data.Preis</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/Memberverwaltung/MitgliederDB;ifexists=true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:MitgliederDB;ifexists=true"/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
       <property name="javax.persistence.jdbc.user" value=""/>

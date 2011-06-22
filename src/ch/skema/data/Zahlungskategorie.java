@@ -5,9 +5,7 @@
 package ch.skema.data;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,17 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Cyrill
  */
 @Entity
-@Table(name = "ZAHLUNGSKATEGORIE", catalog = "MITGLIEDERDB", schema = "PUBLIC")
+@Table(name = "ZAHLUNGSKATEGORIE")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Zahlungskategorie.findAll", query = "SELECT z FROM Zahlungskategorie z"),
@@ -41,10 +37,6 @@ public class Zahlungskategorie implements Serializable {
     @Basic(optional = false)
     @Column(name = "BESCHREIBUNG")
     private String beschreibung;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "zahlungskategorieid")
-    private Collection<Preisvertrag> preisvertragCollection;
-    @OneToMany(mappedBy = "zahlungskategorieid")
-    private Collection<Mitglied> mitgliedCollection;
 
     public Zahlungskategorie() {
     }
@@ -72,24 +64,6 @@ public class Zahlungskategorie implements Serializable {
 
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
-    }
-
-    @XmlTransient
-    public Collection<Preisvertrag> getPreisvertragCollection() {
-        return preisvertragCollection;
-    }
-
-    public void setPreisvertragCollection(Collection<Preisvertrag> preisvertragCollection) {
-        this.preisvertragCollection = preisvertragCollection;
-    }
-
-    @XmlTransient
-    public Collection<Mitglied> getMitgliedCollection() {
-        return mitgliedCollection;
-    }
-
-    public void setMitgliedCollection(Collection<Mitglied> mitgliedCollection) {
-        this.mitgliedCollection = mitgliedCollection;
     }
 
     @Override

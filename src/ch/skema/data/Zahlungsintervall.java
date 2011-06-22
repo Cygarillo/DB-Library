@@ -5,9 +5,7 @@
 package ch.skema.data;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,17 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Cyrill
  */
 @Entity
-@Table(name = "ZAHLUNGSINTERVALL", catalog = "MITGLIEDERDB", schema = "PUBLIC")
+@Table(name = "ZAHLUNGSINTERVALL")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Zahlungsintervall.findAll", query = "SELECT z FROM Zahlungsintervall z"),
@@ -41,10 +37,6 @@ public class Zahlungsintervall implements Serializable {
     @Basic(optional = false)
     @Column(name = "BESCHREIBUNG")
     private String beschreibung;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "intervallid")
-    private Collection<Vertrag> vertragCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "zahlungsintervallid")
-    private Collection<Preisvertrag> preisvertragCollection;
 
     public Zahlungsintervall() {
     }
@@ -72,24 +64,6 @@ public class Zahlungsintervall implements Serializable {
 
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
-    }
-
-    @XmlTransient
-    public Collection<Vertrag> getVertragCollection() {
-        return vertragCollection;
-    }
-
-    public void setVertragCollection(Collection<Vertrag> vertragCollection) {
-        this.vertragCollection = vertragCollection;
-    }
-
-    @XmlTransient
-    public Collection<Preisvertrag> getPreisvertragCollection() {
-        return preisvertragCollection;
-    }
-
-    public void setPreisvertragCollection(Collection<Preisvertrag> preisvertragCollection) {
-        this.preisvertragCollection = preisvertragCollection;
     }
 
     @Override

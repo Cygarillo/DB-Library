@@ -41,19 +41,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rechnung.findByEsr", query = "SELECT r FROM Rechnung r WHERE r.esr = :esr"),
     @NamedQuery(name = "Rechnung.findByNotiz", query = "SELECT r FROM Rechnung r WHERE r.notiz = :notiz")})
 public class Rechnung implements Serializable {
+    @Basic(optional =     false)
+    @Column(name = "FAELLIGKEIT")
+    @Temporal(TemporalType.DATE)
+    private Date faelligkeit;
+    @Column(name =     "EINGANG")
+    @Temporal(TemporalType.DATE)
+    private Date eingang;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "FAELLIGKEIT")
-    @Temporal(TemporalType.DATE)
-    private Date faelligkeit;
-    @Column(name = "EINGANG")
-    @Temporal(TemporalType.DATE)
-    private Date eingang;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ESR")
     private BigDecimal esr;
@@ -85,22 +85,6 @@ public class Rechnung implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getFaelligkeit() {
-        return faelligkeit;
-    }
-
-    public void setFaelligkeit(Date faelligkeit) {
-        this.faelligkeit = faelligkeit;
-    }
-
-    public Date getEingang() {
-        return eingang;
-    }
-
-    public void setEingang(Date eingang) {
-        this.eingang = eingang;
     }
 
     public BigDecimal getEsr() {
@@ -168,6 +152,22 @@ public class Rechnung implements Serializable {
     @Override
     public String toString() {
         return "ch.skema.data.Rechnung[ id=" + id + " ]";
+    }
+
+    public Date getFaelligkeit() {
+        return faelligkeit;
+    }
+
+    public void setFaelligkeit(Date faelligkeit) {
+        this.faelligkeit = faelligkeit;
+    }
+
+    public Date getEingang() {
+        return eingang;
+    }
+
+    public void setEingang(Date eingang) {
+        this.eingang = eingang;
     }
     
 }
