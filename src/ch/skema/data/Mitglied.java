@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mitglied.findAll", query = "SELECT m FROM Mitglied m"),
+    @NamedQuery(name = "Mitglied.findAllAktive", query = "SELECT m FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.aktiv = true)"),
     @NamedQuery(name = "Mitglied.findById", query = "SELECT m FROM Mitglied m WHERE m.id = :id"),
     @NamedQuery(name = "Mitglied.findByName", query = "SELECT m FROM Mitglied m WHERE m.name = :name"),
     @NamedQuery(name = "Mitglied.findByVorname", query = "SELECT m FROM Mitglied m WHERE m.vorname = :vorname"),
@@ -361,5 +362,5 @@ public class Mitglied implements Serializable {
     public String toString() {
         return "ch.skema.data.Mitglied[ id=" + id + " ]";
     }
-    
+        
 }
