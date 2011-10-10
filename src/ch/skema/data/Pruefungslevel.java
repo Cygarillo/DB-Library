@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pruefungslevel.findByBeschreibung", query = "SELECT p FROM Pruefungslevel p WHERE p.beschreibung = :beschreibung"),
     @NamedQuery(name = "Pruefungslevel.findByRubrikID", query = "SELECT p FROM Pruefungslevel p WHERE p.rubrikid = :rubrikid")})
 
-public class Pruefungslevel implements Serializable {
+public class Pruefungslevel implements Serializable,MitgliederDBPersistenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

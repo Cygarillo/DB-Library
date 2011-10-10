@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Adresswechsel.findAll", query = "SELECT a FROM Adresswechsel a"),
     @NamedQuery(name = "Adresswechsel.findById", query = "SELECT a FROM Adresswechsel a WHERE a.id = :id"),
     @NamedQuery(name = "Adresswechsel.findByAbrechnungid", query = "SELECT a FROM Adresswechsel a WHERE a.abrechnungid = :abrechnungid")})
-public class Adresswechsel implements Serializable {
+public class Adresswechsel implements Serializable,MitgliederDBPersistenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

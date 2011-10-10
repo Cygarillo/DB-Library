@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pruefung.findByMitgliedId", query = "SELECT p FROM Pruefung p WHERE p.mitgliedid = :id"),
     @NamedQuery(name = "Pruefung.findByKommentar", query = "SELECT p FROM Pruefung p WHERE p.kommentar = :kommentar"),
     @NamedQuery(name = "Pruefung.findByDatum", query = "SELECT p FROM Pruefung p WHERE p.datum = :datum")})
-public class Pruefung implements Serializable {
+public class Pruefung implements Serializable,MitgliederDBPersistenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

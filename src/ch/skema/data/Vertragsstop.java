@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vertragsstop.findByMitgliedId", query = "SELECT v FROM Vertragsstop v WHERE v.mitgliedid = :id"),
     @NamedQuery(name = "Vertragsstop.findByStartdatum", query = "SELECT v FROM Vertragsstop v WHERE v.startdatum = :startdatum"),
     @NamedQuery(name = "Vertragsstop.findByEnddatum", query = "SELECT v FROM Vertragsstop v WHERE v.enddatum = :enddatum")})
-public class Vertragsstop implements Serializable {
+public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterface {
     @Basic(optional =     false)
     @Column(name = "STARTDATUM")
     @Temporal(TemporalType.DATE)

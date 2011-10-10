@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Zahlungsintervall.findAll", query = "SELECT z FROM Zahlungsintervall z"),
     @NamedQuery(name = "Zahlungsintervall.findById", query = "SELECT z FROM Zahlungsintervall z WHERE z.id = :id"),
     @NamedQuery(name = "Zahlungsintervall.findByBeschreibung", query = "SELECT z FROM Zahlungsintervall z WHERE z.beschreibung = :beschreibung")})
-public class Zahlungsintervall implements Serializable {
+public class Zahlungsintervall implements Serializable,MitgliederDBPersistenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Vertrag.findByAktiv", query = "SELECT v FROM Vertrag v WHERE v.aktiv = :aktiv"),
     @NamedQuery(name = "Vertrag.findByAktivAndMitgliederId", query = "SELECT v FROM Vertrag v WHERE v.aktiv = :aktiv and v.mitgliederid = :id"),
     @NamedQuery(name = "Vertrag.findBySpezialpreis", query = "SELECT v FROM Vertrag v WHERE v.spezialpreis = :spezialpreis")})
-public class Vertrag implements Serializable {
+public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

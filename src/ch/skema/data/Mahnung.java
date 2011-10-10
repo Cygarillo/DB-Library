@@ -31,8 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Mahnung.findAll", query = "SELECT m FROM Mahnung m"),
     @NamedQuery(name = "Mahnung.findById", query = "SELECT m FROM Mahnung m WHERE m.id = :id"),
+    @NamedQuery(name = "Mahnung.findByRechnungsID", query = "SELECT m FROM Mahnung m WHERE m.rechnungid = :id"),
     @NamedQuery(name = "Mahnung.findByFaelligkeit", query = "SELECT m FROM Mahnung m WHERE m.faelligkeit = :faelligkeit")})
-public class Mahnung implements Serializable {
+public class Mahnung implements Serializable,MitgliederDBPersistenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

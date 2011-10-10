@@ -36,11 +36,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rechnung.findAll", query = "SELECT r FROM Rechnung r"),
     @NamedQuery(name = "Rechnung.findById", query = "SELECT r FROM Rechnung r WHERE r.id = :id"),
+    @NamedQuery(name = "Rechnung.findByMitglied", query = "SELECT r FROM Rechnung r WHERE r.mitgliedid = :id"),
     @NamedQuery(name = "Rechnung.findByFaelligkeit", query = "SELECT r FROM Rechnung r WHERE r.faelligkeit = :faelligkeit"),
     @NamedQuery(name = "Rechnung.findByEingang", query = "SELECT r FROM Rechnung r WHERE r.eingang = :eingang"),
     @NamedQuery(name = "Rechnung.findByEsr", query = "SELECT r FROM Rechnung r WHERE r.esr = :esr"),
     @NamedQuery(name = "Rechnung.findByNotiz", query = "SELECT r FROM Rechnung r WHERE r.notiz = :notiz")})
-public class Rechnung implements Serializable {
+public class Rechnung implements Serializable,MitgliederDBPersistenceInterface {
     @Basic(optional =     false)
     @Column(name = "FAELLIGKEIT")
     @Temporal(TemporalType.DATE)

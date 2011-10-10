@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Zahlungskategorie.findAll", query = "SELECT z FROM Zahlungskategorie z"),
     @NamedQuery(name = "Zahlungskategorie.findById", query = "SELECT z FROM Zahlungskategorie z WHERE z.id = :id"),
     @NamedQuery(name = "Zahlungskategorie.findByBeschreibung", query = "SELECT z FROM Zahlungskategorie z WHERE z.beschreibung = :beschreibung")})
-public class Zahlungskategorie implements Serializable {
+public class Zahlungskategorie implements Serializable ,MitgliederDBPersistenceInterface{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

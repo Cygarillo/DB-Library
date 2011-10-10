@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rubrik.findById", query = "SELECT r FROM Rubrik r WHERE r.id = :id"),
     @NamedQuery(name = "Rubrik.findByBeschreibung", query = "SELECT r FROM Rubrik r WHERE r.beschreibung = :beschreibung"),
     @NamedQuery(name = "Rubrik.findByKurzform", query = "SELECT r FROM Rubrik r WHERE r.kurzform = :kurzform")})
-public class Rubrik implements Serializable {
+public class Rubrik implements Serializable,MitgliederDBPersistenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

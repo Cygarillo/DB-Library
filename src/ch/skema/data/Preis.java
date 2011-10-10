@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Preis.findById", query = "SELECT p FROM Preis p WHERE p.id = :id"),
     @NamedQuery(name = "Preis.findByPreis", query = "SELECT p FROM Preis p WHERE p.preis = :preis"),
     @NamedQuery(name = "Preis.findByBeschreibung", query = "SELECT p FROM Preis p WHERE p.beschreibung = :beschreibung")})
-public class Preis implements Serializable {
+public class Preis implements Serializable ,MitgliederDBPersistenceInterface{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findByJahreslizenzabgerechnet", query = "SELECT m FROM Mitglied m WHERE m.jahreslizenzabgerechnet = :jahreslizenzabgerechnet"),
     @NamedQuery(name = "Mitglied.findByFamilienrabat", query = "SELECT m FROM Mitglied m WHERE m.familienrabat = :familienrabat"),
     @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum")})
-public class Mitglied implements Serializable {
+public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
