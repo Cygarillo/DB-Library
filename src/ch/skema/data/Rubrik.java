@@ -29,6 +29,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rubrik.findByBeschreibung", query = "SELECT r FROM Rubrik r WHERE r.beschreibung = :beschreibung"),
     @NamedQuery(name = "Rubrik.findByKurzform", query = "SELECT r FROM Rubrik r WHERE r.kurzform = :kurzform")})
 public class Rubrik implements Serializable,MitgliederDBPersistenceInterface {
+    public static final int ID_WINGCHUNG = 1;
+    public static final int ID_ESKRIMA = 2;
+    public static final int ID_TAICHI = 3;
+    public static final int ID_CHIKUNG50PLUS = 4;
+    public static final int ID_KINDERWUSHU = 5;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

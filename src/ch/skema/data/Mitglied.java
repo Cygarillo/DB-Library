@@ -31,13 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Cyrill
  */
 @Entity
-@Table(name = "MITGLIED", catalog = "MITGLIEDERDB", schema = "PUBLIC")
+@Table(name = "MITGLIED", catalog = "MITGLIEDERDB", schema = "PUBLIC") 
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mitglied.findAll", query = "SELECT m FROM Mitglied m"),
     @NamedQuery(name = "Mitglied.findAllAktive", query = "SELECT m FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.aktiv = true)"),
     @NamedQuery(name = "Mitglied.findAllPassive", query = "SELECT m FROM Mitglied m  where m.id not in (SELECT v.mitgliederid.id FROM Vertrag v where v.aktiv = true)"),
+    @NamedQuery(name = "Mitglied.findAllByRubrik", query = "SELECT m FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.rubrikid = :rubrik)"),
     @NamedQuery(name = "Mitglied.findById", query = "SELECT m FROM Mitglied m WHERE m.id = :id"),
+    @NamedQuery(name = "Mitglied.findByZahlungskategorie", query = "SELECT m FROM Mitglied m WHERE m.zahlungskategorieid = :zahlungskategorie"),
     @NamedQuery(name = "Mitglied.findByName", query = "SELECT m FROM Mitglied m WHERE m.name = :name"),
     @NamedQuery(name = "Mitglied.findByVorname", query = "SELECT m FROM Mitglied m WHERE m.vorname = :vorname"),
     @NamedQuery(name = "Mitglied.findByStrasse", query = "SELECT m FROM Mitglied m WHERE m.strasse = :strasse"),
