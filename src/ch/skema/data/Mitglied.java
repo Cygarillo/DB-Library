@@ -365,5 +365,7 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     public String toString() {
         return "ch.skema.data.Mitglied[ id=" + id + " ]";
     }
+    
+    
         
 }

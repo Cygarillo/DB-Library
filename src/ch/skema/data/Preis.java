@@ -28,7 +28,21 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Preis.findById", query = "SELECT p FROM Preis p WHERE p.id = :id"),
     @NamedQuery(name = "Preis.findByPreis", query = "SELECT p FROM Preis p WHERE p.preis = :preis"),
     @NamedQuery(name = "Preis.findByBeschreibung", query = "SELECT p FROM Preis p WHERE p.beschreibung = :beschreibung")})
-public class Preis implements Serializable ,MitgliederDBPersistenceInterface{
+public class Preis implements Serializable, MitgliederDBPersistenceInterface {
+
+    public final static int Erwachsen1J = 1;
+    public final static int Lehrling1J = 2;
+    public final static int Kinder1J = 3;
+    public final static int Erwachsen6M = 4;
+    public final static int Lehrling6M = 5;
+    public final static int Kinder6M = 6;
+    public final static int Disziplin2fuer1J = 7;
+    public final static int Disziplin2fuer6M = 8;
+    public final static int Disziplin3fuer1J = 9;
+    public final static int Disziplin3fuer6M = 10;
+    public final static int Familienrabatt1J = 11;
+    public final static int Familienrabatt6M = 12;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,5 +115,4 @@ public class Preis implements Serializable ,MitgliederDBPersistenceInterface{
     public String toString() {
         return "ch.skema.data.Preis[ id=" + id + " ]";
     }
-    
 }
