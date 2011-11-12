@@ -5,6 +5,7 @@
 package ch.skema.data;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Zahlungsintervall.findById", query = "SELECT z FROM Zahlungsintervall z WHERE z.id = :id"),
     @NamedQuery(name = "Zahlungsintervall.findByBeschreibung", query = "SELECT z FROM Zahlungsintervall z WHERE z.beschreibung = :beschreibung")})
 public class Zahlungsintervall implements Serializable,MitgliederDBPersistenceInterface {
+    @OneToMany(mappedBy = "zahlungsintervallid")
+    private Collection<Preis> preisCollection;
     public static final int ID_JAEHRLICH = 1;
     public static final int ID_HALBJAEHRLICH = 2;
     private static final long serialVersionUID = 1L;
@@ -91,6 +96,15 @@ public class Zahlungsintervall implements Serializable,MitgliederDBPersistenceIn
     @Override
     public String toString() {
         return beschreibung;
+    }
+
+    @XmlTransient
+    public Collection<Preis> getPreisCollection() {
+        return preisCollection;
+    }
+
+    public void setPreisCollection(Collection<Preis> preisCollection) {
+        this.preisCollection = preisCollection;
     }
     
 }

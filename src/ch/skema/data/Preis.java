@@ -5,16 +5,21 @@
 package ch.skema.data;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,6 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Preis.findByPreis", query = "SELECT p FROM Preis p WHERE p.preis = :preis"),
     @NamedQuery(name = "Preis.findByBeschreibung", query = "SELECT p FROM Preis p WHERE p.beschreibung = :beschreibung")})
 public class Preis implements Serializable, MitgliederDBPersistenceInterface {
+    @OneToMany(mappedBy = "preisid")
+    private Collection<Rechnungsinhalt> rechnungsinhaltCollection;
+    @JoinColumn(name = "ZAHLUNGSKATEGORIEID", referencedColumnName = "ID")
+    @ManyToOne
+    private Zahlungskategorie zahlungskategorieid;
+    @JoinColumn(name = "ZAHLUNGSINTERVALLID", referencedColumnName = "ID")
+    @ManyToOne
+    private Zahlungsintervall zahlungsintervallid;
 
     public final static int Erwachsen1J = 1;
     public final static int Lehrling1J = 2;
@@ -114,5 +127,30 @@ public class Preis implements Serializable, MitgliederDBPersistenceInterface {
     @Override
     public String toString() {
         return "ch.skema.data.Preis[ id=" + id + " ]";
+    }
+
+    public Zahlungskategorie getZahlungskategorieid() {
+        return zahlungskategorieid;
+    }
+
+    public void setZahlungskategorieid(Zahlungskategorie zahlungskategorieid) {
+        this.zahlungskategorieid = zahlungskategorieid;
+    }
+
+    public Zahlungsintervall getZahlungsintervallid() {
+        return zahlungsintervallid;
+    }
+
+    public void setZahlungsintervallid(Zahlungsintervall zahlungsintervallid) {
+        this.zahlungsintervallid = zahlungsintervallid;
+    }
+
+    @XmlTransient
+    public Collection<Rechnungsinhalt> getRechnungsinhaltCollection() {
+        return rechnungsinhaltCollection;
+    }
+
+    public void setRechnungsinhaltCollection(Collection<Rechnungsinhalt> rechnungsinhaltCollection) {
+        this.rechnungsinhaltCollection = rechnungsinhaltCollection;
     }
 }
