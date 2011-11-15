@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rechnungsinhalt.findAll", query = "SELECT r FROM Rechnungsinhalt r"),
-    @NamedQuery(name = "Rechnungsinhalt.findById", query = "SELECT r FROM Rechnungsinhalt r WHERE r.id = :id")})
+    @NamedQuery(name = "Rechnungsinhalt.findById", query = "SELECT r FROM Rechnungsinhalt r WHERE r.id = :id"),
+    @NamedQuery(name = "Rechnungsinhalt.findByRechnungsID", query = "SELECT r FROM Rechnungsinhalt r WHERE r.rechnungid = :id")})
 public class Rechnungsinhalt implements Serializable,MitgliederDBPersistenceInterface {
     @JoinColumn(name = "PREISID", referencedColumnName = "ID")
     @ManyToOne

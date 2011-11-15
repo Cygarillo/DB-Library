@@ -18,6 +18,5 @@
     <class>ch.skema.data.Vertrag</class>
     <class>ch.skema.data.Pruefung</class>
     <class>ch.skema.data.Preis</class>
-    
   </persistence-unit>
 </persistence>

@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Preis.findAll", query = "SELECT p FROM Preis p"),
     @NamedQuery(name = "Preis.findById", query = "SELECT p FROM Preis p WHERE p.id = :id"),
+    @NamedQuery(name = "Preis.findByKategorieAndIntervall", query = "SELECT p FROM Preis p WHERE p.zahlungskategorieid = :kat and p.zahlungsintervallid = :inter"),
     @NamedQuery(name = "Preis.findByPreis", query = "SELECT p FROM Preis p WHERE p.preis = :preis"),
     @NamedQuery(name = "Preis.findByBeschreibung", query = "SELECT p FROM Preis p WHERE p.beschreibung = :beschreibung")})
 public class Preis implements Serializable, MitgliederDBPersistenceInterface {
