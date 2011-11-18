@@ -56,6 +56,15 @@ public class Preis implements Serializable, MitgliederDBPersistenceInterface {
     public final static int Disziplin3fuer6M = 10;
     public final static int Familienrabatt1J = 11;
     public final static int Familienrabatt6M = 12;
+    public final static int MemberErwachsen = 13;
+    public final static int MemberKindJugend = 14;
+    public final static int MemberErwachsenAbAugust = 15;
+    public final static int MemberKindJugendAbAugust = 16;
+    public final static int Einschreibgebuehr = 17;
+    public final static int UniformWCEskrima = 18;
+    public final static int UniformKinder = 19;
+    public final static int UniformTC = 20;
+            
     
     private static final long serialVersionUID = 1L;
     @Id
