@@ -46,7 +46,7 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
     private Preis spezialpreis;
     @Basic(optional = false)
     @Column(name = "AKTIV")
-    private Serializable aktiv;
+    private boolean aktiv;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -137,11 +137,11 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
         return "ch.skema.data.Vertrag[ id=" + id + " ]";
     }
 
-    public Serializable getAktiv() {
+    public boolean getAktiv() {
         return aktiv;
     }
 
-    public void setAktiv(Serializable aktiv) {
+    public void setAktiv(boolean aktiv) {
         this.aktiv = aktiv;
     }
 
