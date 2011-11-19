@@ -37,21 +37,23 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vertrag.findByAktivAndMitgliederId", query = "SELECT v FROM Vertrag v WHERE v.aktiv = :aktiv and v.mitgliederid = :id"),
     @NamedQuery(name = "Vertrag.findBySpezialpreis", query = "SELECT v FROM Vertrag v WHERE v.spezialpreis = :spezialpreis")})
 public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
+    @Basic(optional =     false)
+    @Column(name = "STARTDATUM")
+    @Temporal(TemporalType.DATE)
+    private Date startdatum;
+    @JoinColumn(name = "SPEZIALPREIS", referencedColumnName = "ID")
+    @ManyToOne
+    private Preis spezialpreis;
+    @Basic(optional = false)
+    @Column(name = "AKTIV")
+    private Serializable aktiv;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "STARTDATUM")
-    @Temporal(TemporalType.DATE)
-    private Date startdatum;
-    @Basic(optional = false)
-    @Column(name = "AKTIV")
-    private boolean aktiv;
-    @Column(name = "SPEZIALPREIS")
-    private Integer spezialpreis;
+   
     @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Zahlungsintervall intervallid;
@@ -83,29 +85,7 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
         this.id = id;
     }
 
-    public Date getStartdatum() {
-        return startdatum;
-    }
 
-    public void setStartdatum(Date startdatum) {
-        this.startdatum = startdatum;
-    }
-
-    public boolean getAktiv() {
-        return aktiv;
-    }
-
-    public void setAktiv(boolean aktiv) {
-        this.aktiv = aktiv;
-    }
-
-    public Integer getSpezialpreis() {
-        return spezialpreis;
-    }
-
-    public void setSpezialpreis(Integer spezialpreis) {
-        this.spezialpreis = spezialpreis;
-    }
 
     public Zahlungsintervall getIntervallid() {
         return intervallid;
@@ -155,6 +135,30 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
     @Override
     public String toString() {
         return "ch.skema.data.Vertrag[ id=" + id + " ]";
+    }
+
+    public Serializable getAktiv() {
+        return aktiv;
+    }
+
+    public void setAktiv(Serializable aktiv) {
+        this.aktiv = aktiv;
+    }
+
+    public Date getStartdatum() {
+        return startdatum;
+    }
+
+    public void setStartdatum(Date startdatum) {
+        this.startdatum = startdatum;
+    }
+
+    public Preis getSpezialpreis() {
+        return spezialpreis;
+    }
+
+    public void setSpezialpreis(Preis spezialpreis) {
+        this.spezialpreis = spezialpreis;
     }
     
 }

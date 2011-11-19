@@ -35,6 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Preis.findByPreis", query = "SELECT p FROM Preis p WHERE p.preis = :preis"),
     @NamedQuery(name = "Preis.findByBeschreibung", query = "SELECT p FROM Preis p WHERE p.beschreibung = :beschreibung")})
 public class Preis implements Serializable, MitgliederDBPersistenceInterface {
+    @OneToMany(mappedBy = "spezialpreis")
+    private Collection<Vertrag> vertragCollection;
     @OneToMany(mappedBy = "preisid")
     private Collection<Rechnungsinhalt> rechnungsinhaltCollection;
     @JoinColumn(name = "ZAHLUNGSKATEGORIEID", referencedColumnName = "ID")
@@ -162,5 +164,14 @@ public class Preis implements Serializable, MitgliederDBPersistenceInterface {
 
     public void setRechnungsinhaltCollection(Collection<Rechnungsinhalt> rechnungsinhaltCollection) {
         this.rechnungsinhaltCollection = rechnungsinhaltCollection;
+    }
+
+    @XmlTransient
+    public Collection<Vertrag> getVertragCollection() {
+        return vertragCollection;
+    }
+
+    public void setVertragCollection(Collection<Vertrag> vertragCollection) {
+        this.vertragCollection = vertragCollection;
     }
 }
