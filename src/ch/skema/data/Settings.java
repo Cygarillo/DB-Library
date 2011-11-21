@@ -5,6 +5,7 @@
 package ch.skema.data;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,6 +36,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Settings.findByKinderjugendvorlage", query = "SELECT s FROM Settings s WHERE s.kinderjugendvorlage = :kinderjugendvorlage"),
     @NamedQuery(name = "Settings.findByAutomemberrechnung", query = "SELECT s FROM Settings s WHERE s.automemberrechnung = :automemberrechnung")})
 public class Settings implements Serializable {
+    @Column(name = "KINDERJUGENDVORLAGE")
+    private Boolean kinderjugendvorlage;
+    @Column(name = "AUTOMEMBERRECHNUNG")
+    private Boolean automemberrechnung;
+    @Column(name = "LASTSTARTED")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date laststarted;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -50,10 +60,6 @@ public class Settings implements Serializable {
     private Integer vorgeburtstag;
     @Column(name = "NACHGEBURTSTAG")
     private Integer nachgeburtstag;
-    @Column(name = "KINDERJUGENDVORLAGE")
-    private Boolean kinderjugendvorlage;
-    @Column(name = "AUTOMEMBERRECHNUNG")
-    private Boolean automemberrechnung;
 
     public Settings() {
     }
@@ -118,22 +124,6 @@ public class Settings implements Serializable {
         this.nachgeburtstag = nachgeburtstag;
     }
 
-    public Boolean getKinderjugendvorlage() {
-        return kinderjugendvorlage;
-    }
-
-    public void setKinderjugendvorlage(Boolean kinderjugendvorlage) {
-        this.kinderjugendvorlage = kinderjugendvorlage;
-    }
-
-    public Boolean getAutomemberrechnung() {
-        return automemberrechnung;
-    }
-
-    public void setAutomemberrechnung(Boolean automemberrechnung) {
-        this.automemberrechnung = automemberrechnung;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -157,6 +147,30 @@ public class Settings implements Serializable {
     @Override
     public String toString() {
         return "ch.skema.data.Settings[ id=" + id + " ]";
+    }
+
+    public Boolean getKinderjugendvorlage() {
+        return kinderjugendvorlage;
+    }
+
+    public void setKinderjugendvorlage(Boolean kinderjugendvorlage) {
+        this.kinderjugendvorlage = kinderjugendvorlage;
+    }
+
+    public Boolean getAutomemberrechnung() {
+        return automemberrechnung;
+    }
+
+    public void setAutomemberrechnung(Boolean automemberrechnung) {
+        this.automemberrechnung = automemberrechnung;
+    }
+
+    public Date getLaststarted() {
+        return laststarted;
+    }
+
+    public void setLaststarted(Date laststarted) {
+        this.laststarted = laststarted;
     }
     
 }
