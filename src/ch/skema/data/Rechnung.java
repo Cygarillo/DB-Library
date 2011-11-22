@@ -4,10 +4,15 @@
  */
 package ch.skema.data;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,12 +47,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rechnung.findByEingang", query = "SELECT r FROM Rechnung r WHERE r.eingang = :eingang"),
     @NamedQuery(name = "Rechnung.findByEsr", query = "SELECT r FROM Rechnung r WHERE r.esr = :esr"),
     @NamedQuery(name = "Rechnung.findByNotiz", query = "SELECT r FROM Rechnung r WHERE r.notiz = :notiz")})
-public class Rechnung implements Serializable,MitgliederDBPersistenceInterface {
-    @Basic(optional =     false)
+public class Rechnung implements Serializable, MitgliederDBPersistenceInterface {
+
+    @Basic(optional = false)
     @Column(name = "FAELLIGKEIT")
     @Temporal(TemporalType.DATE)
     private Date faelligkeit;
-    @Column(name =     "EINGANG")
+    @Column(name = "EINGANG")
     @Temporal(TemporalType.DATE)
     private Date eingang;
     private static final long serialVersionUID = 1L;
@@ -169,6 +176,24 @@ public class Rechnung implements Serializable,MitgliederDBPersistenceInterface {
 
     public void setEingang(Date eingang) {
         this.eingang = eingang;
+        fire("date", null, eingang);
     }
-    
+    @Transient
+    private List listeners = Collections.synchronizedList(new LinkedList());
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        listeners.add(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        listeners.remove(pcl);
+    }
+
+    private void fire(String propertyName, Object old, Object nue) {
+        //Passing 0 below on purpose, so you only synchronize for one atomic call:
+        PropertyChangeListener[] pcls = (PropertyChangeListener[]) listeners.toArray(new PropertyChangeListener[0]);
+        for (int i = 0; i < pcls.length; i++) {
+            pcls[i].propertyChange(new PropertyChangeEvent(this, propertyName, old, nue));
+        }
+    }
 }
