@@ -43,6 +43,21 @@ public class Settings implements Serializable {
     @Column(name = "LASTSTARTED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date laststarted;
+    @Column(name = "LASTBACKUP")
+    @Temporal(TemporalType.DATE)
+    private Date lastbackup;
+    @Column(name = "COLORWINGCHUN")
+    private String colorwingchun;
+    @Column(name = "COLORESKRIMA")
+    private String coloreskrima;
+    @Column(name = "COLORKINDERWUSHU")
+    private String colorkinderwushu;
+    @Column(name = "COLORTAICHI")
+    private String colortaichi;
+    @Column(name = "COLORCHIKUNG50PLUS")
+    private String colorchikung50plus;
+    @Column(name = "STANDORT")
+    private String standort;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -171,6 +186,62 @@ public class Settings implements Serializable {
 
     public void setLaststarted(Date laststarted) {
         this.laststarted = laststarted;
+    }
+
+    public Date getLastbackup() {
+        return lastbackup;
+    }
+
+    public void setLastbackup(Date lastbackup) {
+        this.lastbackup = lastbackup;
+    }
+
+    public String getColorwingchun() {
+        return colorwingchun;
+    }
+
+    public void setColorwingchun(String colorwingchun) {
+        this.colorwingchun = colorwingchun;
+    }
+
+    public String getColoreskrima() {
+        return coloreskrima;
+    }
+
+    public void setColoreskrima(String coloreskrima) {
+        this.coloreskrima = coloreskrima;
+    }
+
+    public String getColorkinderwushu() {
+        return colorkinderwushu;
+    }
+
+    public void setColorkinderwushu(String colorkinderwushu) {
+        this.colorkinderwushu = colorkinderwushu;
+    }
+
+    public String getColortaichi() {
+        return colortaichi;
+    }
+
+    public void setColortaichi(String colortaichi) {
+        this.colortaichi = colortaichi;
+    }
+
+    public String getColorchikung50plus() {
+        return colorchikung50plus;
+    }
+
+    public void setColorchikung50plus(String colorchikung50plus) {
+        this.colorchikung50plus = colorchikung50plus;
+    }
+
+    public String getStandort() {
+        return standort;
+    }
+
+    public void setStandort(String standort) {
+        this.standort = standort;
     }
     
 }
