@@ -40,6 +40,8 @@ public class Settings implements Serializable {
     private Boolean kinderjugendvorlage;
     @Column(name = "AUTOMEMBERRECHNUNG")
     private Boolean automemberrechnung;
+    @Column(name = "EIGENEERSTEMAHNUNG")
+    private Boolean eigeneerstemahnung;
     @Column(name = "LASTSTARTED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date laststarted;
@@ -172,6 +174,13 @@ public class Settings implements Serializable {
 
     public void setKinderjugendvorlage(Boolean kinderjugendvorlage) {
         this.kinderjugendvorlage = kinderjugendvorlage;
+    }
+    public Boolean getEigeneerstemahnung() {
+        return eigeneerstemahnung;
+    }
+
+    public void setEigeneerstemahnung(Boolean eigeneerstemahnung) {
+        this.eigeneerstemahnung = eigeneerstemahnung;
     }
 
     public Boolean getAutomemberrechnung() {
