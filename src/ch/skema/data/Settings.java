@@ -56,6 +56,8 @@ public class Settings implements Serializable {
     private String colortaichi;
     @Column(name = "COLORCHIKUNG50PLUS")
     private String colorchikung50plus;
+    @Column(name = "COLORKOMBI")
+    private String colorkombi;
     @Column(name = "STANDORT")
     private String standort;
     private static final long serialVersionUID = 1L;
@@ -234,6 +236,14 @@ public class Settings implements Serializable {
 
     public void setColorchikung50plus(String colorchikung50plus) {
         this.colorchikung50plus = colorchikung50plus;
+    }
+    
+    public String getColorkombi() {
+        return colorkombi;
+    }
+
+    public void setColorkombi(String colorkombi) {
+        this.colorkombi = colorkombi;
     }
 
     public String getStandort() {
