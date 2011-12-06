@@ -28,6 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Austritt.findAll", query = "SELECT a FROM Austritt a"),
     @NamedQuery(name = "Austritt.findById", query = "SELECT a FROM Austritt a WHERE a.id = :id"),
+    @NamedQuery(name = "Austritt.findAlreadyChanged", query = "SELECT a FROM Austritt a WHERE a.mitgliedid = :mitglied and a.abrechnungid is null"),
+    @NamedQuery(name = "Austritt.findNotAbgerechnet", query = "SELECT a FROM Austritt a WHERE a.abrechnungid is null"),
     @NamedQuery(name = "Austritt.findByAbrechnungid", query = "SELECT a FROM Austritt a WHERE a.abrechnungid = :abrechnungid")})
 public class Austritt implements Serializable ,MitgliederDBPersistenceInterface{
     private static final long serialVersionUID = 1L;
