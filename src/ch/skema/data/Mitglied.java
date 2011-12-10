@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Mitglied.findAll", query = "SELECT m FROM Mitglied m"),
     @NamedQuery(name = "Mitglied.findAllAktive", query = "SELECT m FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.aktiv = true)"),
+    @NamedQuery(name = "Mitglied.findAllOhneAustritt", query = "SELECT m FROM Mitglied m  where m.austrittsdatum is null"),
     @NamedQuery(name = "Mitglied.findAllPassive", query = "SELECT m FROM Mitglied m  where m.id not in (SELECT v.mitgliederid.id FROM Vertrag v where v.aktiv = true)"),
     @NamedQuery(name = "Mitglied.findAllByRubrik", query = "SELECT m FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.rubrikid = :rubrik)"),
     @NamedQuery(name = "Mitglied.findById", query = "SELECT m FROM Mitglied m WHERE m.id = :id"),
@@ -52,8 +53,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findByGeburtstag", query = "SELECT m FROM Mitglied m WHERE m.geburtstag = :geburtstag"),
     @NamedQuery(name = "Mitglied.findByEintrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.eintrittsdatum = :eintrittsdatum"),
     @NamedQuery(name = "Mitglied.findByTribe", query = "SELECT m FROM Mitglied m WHERE m.tribe = :tribe"),
-    @NamedQuery(name = "Mitglied.findByJahreslizenz", query = "SELECT m FROM Mitglied m WHERE m.jahreslizenz = :jahreslizenz"),
-    @NamedQuery(name = "Mitglied.findByJahreslizenzabgerechnet", query = "SELECT m FROM Mitglied m WHERE m.jahreslizenzabgerechnet = :jahreslizenzabgerechnet"),
     @NamedQuery(name = "Mitglied.findByFamilienrabat", query = "SELECT m FROM Mitglied m WHERE m.familienrabat = :familienrabat"),
     @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum")})
 public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
@@ -92,11 +91,6 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     private Date eintrittsdatum;
     @Column(name = "TRIBE")
     private boolean tribe;
-    @Column(name = "JAHRESLIZENZ")
-    @Temporal(TemporalType.DATE)
-    private Date jahreslizenz;
-    @Column(name = "JAHRESLIZENZABGERECHNET")
-    private boolean jahreslizenzabgerechnet;
     @Column(name = "FAMILIENRABAT")
     private boolean familienrabat;
     @Column(name = "AUSTRITTSDATUM")
@@ -122,6 +116,9 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
     private Collection<Pruefung> pruefungCollection;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliederid")
+    private Collection<Membergebuehr> memberGebuehrCollection;
+    
     public Mitglied() {
     }
 
@@ -240,21 +237,7 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.tribe = tribe;
     }
 
-    public Date getJahreslizenz() {
-        return jahreslizenz;
-    }
 
-    public void setJahreslizenz(Date jahreslizenz) {
-        this.jahreslizenz = jahreslizenz;
-    }
-
-    public boolean getJahreslizenzabgerechnet() {
-        return jahreslizenzabgerechnet;
-    }
-
-    public void setJahreslizenzabgerechnet(boolean jahreslizenzabgerechnet) {
-        this.jahreslizenzabgerechnet = jahreslizenzabgerechnet;
-    }
 
     public boolean getFamilienrabat() {
         return familienrabat;
@@ -364,6 +347,17 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @Override
     public String toString() {
         return "ch.skema.data.Mitglied[ id=" + id + " ]";
+    }
+
+
+
+    @XmlTransient
+    public Collection<Membergebuehr> getMembergebuehrCollection() {
+        return memberGebuehrCollection;
+    }
+
+    public void setMembergebuehrCollection(Collection<Membergebuehr> member1Collection) {
+        this.memberGebuehrCollection = member1Collection;
     }
     
     

@@ -79,6 +79,8 @@ public class Settings implements Serializable {
     private Integer vorgeburtstag;
     @Column(name = "NACHGEBURTSTAG")
     private Integer nachgeburtstag;
+    @Column(name = "WOCHENZAHLFUERNEUEMEMBERGEBUER")
+    private Integer wochenzahlFuerNeueMembergebuehr;
 
     public Settings() {
     }
@@ -261,6 +263,14 @@ public class Settings implements Serializable {
 
     public void setStandort(String standort) {
         this.standort = standort;
+    }
+
+    public Integer getWochenzahlFuerNeueMembergebuehr() {
+        return wochenzahlFuerNeueMembergebuehr;
+    }
+
+    public void setWochenzahlFuerNeueMembergebuehr(Integer wochenzahlFuerNeueMembergebuehr) {
+        this.wochenzahlFuerNeueMembergebuehr = wochenzahlFuerNeueMembergebuehr;
     }
     
 }

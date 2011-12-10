@@ -20,5 +20,6 @@
     <class>ch.skema.data.Preis</class>
     <class>ch.skema.data.Settings</class>
     <class>ch.skema.data.Abrechnung</class>
+    <class>ch.skema.data.Membergebuehr</class>
   </persistence-unit>
 </persistence>
