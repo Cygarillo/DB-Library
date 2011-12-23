@@ -75,11 +75,11 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @Column(name = "ORT")
     private String ort;
     @Column(name = "TELP")
-    private Integer telp;
+    private String telp;
     @Column(name = "TELG")
-    private Integer telg;
+    private String telg;
     @Column(name = "TELM")
-    private Integer telm;
+    private String telm;
     @Column(name = "EMAIL")
     private String email;
     @Column(name = "GEBURTSTAG")
@@ -181,27 +181,27 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.ort = ort;
     }
 
-    public Integer getTelp() {
+    public String getTelp() {
         return telp;
     }
 
-    public void setTelp(Integer telp) {
+    public void setTelp(String telp) {
         this.telp = telp;
     }
 
-    public Integer getTelg() {
+    public String getTelg() {
         return telg;
     }
 
-    public void setTelg(Integer telg) {
+    public void setTelg(String telg) {
         this.telg = telg;
     }
 
-    public Integer getTelm() {
+    public String getTelm() {
         return telm;
     }
 
-    public void setTelm(Integer telm) {
+    public void setTelm(String telm) {
         this.telm = telm;
     }
 
