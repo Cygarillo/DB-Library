@@ -7,6 +7,7 @@ package ch.skema.data;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Zahlungsintervall.findById", query = "SELECT z FROM Zahlungsintervall z WHERE z.id = :id"),
     @NamedQuery(name = "Zahlungsintervall.findByBeschreibung", query = "SELECT z FROM Zahlungsintervall z WHERE z.beschreibung = :beschreibung")})
 public class Zahlungsintervall implements Serializable,MitgliederDBPersistenceInterface {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "intervallid")
+    private Collection<Mitglied> mitgliedCollection;
     @OneToMany(mappedBy = "zahlungsintervallid")
     private Collection<Preis> preisCollection;
     public static final int ID_JAEHRLICH = 1;
@@ -105,6 +108,15 @@ public class Zahlungsintervall implements Serializable,MitgliederDBPersistenceIn
 
     public void setPreisCollection(Collection<Preis> preisCollection) {
         this.preisCollection = preisCollection;
+    }
+
+    @XmlTransient
+    public Collection<Mitglied> getMitgliedCollection() {
+        return mitgliedCollection;
+    }
+
+    public void setMitgliedCollection(Collection<Mitglied> mitgliedCollection) {
+        this.mitgliedCollection = mitgliedCollection;
     }
     
 }

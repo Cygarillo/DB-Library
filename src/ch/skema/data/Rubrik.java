@@ -5,7 +5,9 @@
 package ch.skema.data;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rubrik.findByBeschreibung", query = "SELECT r FROM Rubrik r WHERE r.beschreibung = :beschreibung"),
     @NamedQuery(name = "Rubrik.findByKurzform", query = "SELECT r FROM Rubrik r WHERE r.kurzform = :kurzform")})
 public class Rubrik implements Serializable,MitgliederDBPersistenceInterface {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubrikid")
+    private Collection<Vertrag> vertragCollection;
     public static final int ID_WINGCHUNG = 1;
     public static final int ID_ESKRIMA = 2;
     public static final int ID_TAICHI = 3;
@@ -106,6 +112,15 @@ public class Rubrik implements Serializable,MitgliederDBPersistenceInterface {
     @Override
     public String toString() {
         return beschreibung;
+    }
+
+    @XmlTransient
+    public Collection<Vertrag> getVertragCollection() {
+        return vertragCollection;
+    }
+
+    public void setVertragCollection(Collection<Vertrag> vertragCollection) {
+        this.vertragCollection = vertragCollection;
     }
     
 }

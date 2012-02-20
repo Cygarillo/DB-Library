@@ -56,6 +56,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findByFamilienrabat", query = "SELECT m FROM Mitglied m WHERE m.familienrabat = :familienrabat"),
     @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum")})
 public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
+    
+    @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Zahlungsintervall intervallid;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -358,6 +362,16 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
 
     public void setMembergebuehrCollection(Collection<Membergebuehr> member1Collection) {
         this.memberGebuehrCollection = member1Collection;
+    }
+
+    
+
+    public Zahlungsintervall getIntervallid() {
+        return intervallid;
+    }
+
+    public void setIntervallid(Zahlungsintervall intervallid) {
+        this.intervallid = intervallid;
     }
     
     

@@ -41,12 +41,12 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
     @Column(name = "STARTDATUM")
     @Temporal(TemporalType.DATE)
     private Date startdatum;
-    @JoinColumn(name = "SPEZIALPREIS", referencedColumnName = "ID")
-    @ManyToOne
-    private Preis spezialpreis;
     @Basic(optional = false)
     @Column(name = "AKTIV")
     private boolean aktiv;
+    @JoinColumn(name = "SPEZIALPREIS", referencedColumnName = "ID")
+    @ManyToOne
+    private Preis spezialpreis;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,9 +54,7 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
     @Column(name = "ID")
     private Integer id;
    
-    @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Zahlungsintervall intervallid;
+
     @JoinColumn(name = "RUBRIKID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Rubrik rubrikid;
@@ -86,14 +84,6 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
     }
 
 
-
-    public Zahlungsintervall getIntervallid() {
-        return intervallid;
-    }
-
-    public void setIntervallid(Zahlungsintervall intervallid) {
-        this.intervallid = intervallid;
-    }
 
     public Rubrik getRubrikid() {
         return rubrikid;
@@ -137,12 +127,12 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
         return "ch.skema.data.Vertrag[ id=" + id + " ]";
     }
 
-    public boolean getAktiv() {
-        return aktiv;
+    public Preis getSpezialpreis() {
+        return spezialpreis;
     }
 
-    public void setAktiv(boolean aktiv) {
-        this.aktiv = aktiv;
+    public void setSpezialpreis(Preis spezialpreis) {
+        this.spezialpreis = spezialpreis;
     }
 
     public Date getStartdatum() {
@@ -153,12 +143,12 @@ public class Vertrag implements Serializable ,MitgliederDBPersistenceInterface{
         this.startdatum = startdatum;
     }
 
-    public Preis getSpezialpreis() {
-        return spezialpreis;
+    public boolean getAktiv() {
+        return aktiv;
     }
 
-    public void setSpezialpreis(Preis spezialpreis) {
-        this.spezialpreis = spezialpreis;
+    public void setAktiv(boolean  aktiv) {
+        this.aktiv = aktiv;
     }
     
 }
