@@ -56,6 +56,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findByFamilienrabat", query = "SELECT m FROM Mitglied m WHERE m.familienrabat = :familienrabat"),
     @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum")})
 public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
+   
+    @Column(name = "ZAHLUNGSFAELLIGKEIT")
+    @Temporal(TemporalType.DATE)
+    private Date zahlungsfaelligkeit;
     
     @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -372,6 +376,15 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
 
     public void setIntervallid(Zahlungsintervall intervallid) {
         this.intervallid = intervallid;
+    }
+
+
+    public Date getZahlungsfaelligkeit() {
+        return zahlungsfaelligkeit;
+    }
+
+    public void setZahlungsfaelligkeit(Date zahlungsfaelligkeit) {
+        this.zahlungsfaelligkeit = zahlungsfaelligkeit;
     }
     
     
