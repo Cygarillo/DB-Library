@@ -43,6 +43,8 @@ public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterfa
     @Column(name = "ENDDATUM")
     @Temporal(TemporalType.DATE)
     private Date enddatum;
+    @Column(name = "GUTHABEN")
+    private Integer guthaben;
     @JoinColumn(name = "MITGLIEDID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Mitglied mitgliedid;
@@ -102,6 +104,14 @@ public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterfa
         return "ch.skema.data.Vertragsstop[ id=" + id + " ]";
     }
 
+    public Mitglied getMitgliedid() {
+        return mitgliedid;
+    }
+
+    public void setMitgliedid(Mitglied mitgliedid) {
+        this.mitgliedid = mitgliedid;
+    }
+
     public Date getStartdatum() {
         return startdatum;
     }
@@ -118,12 +128,12 @@ public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterfa
         this.enddatum = enddatum;
     }
 
-    public Mitglied getMitgliedid() {
-        return mitgliedid;
+    public Integer getGuthaben() {
+        return guthaben;
     }
 
-    public void setMitgliedid(Mitglied mitgliedid) {
-        this.mitgliedid = mitgliedid;
+    public void setGuthaben(Integer guthaben) {
+        this.guthaben = guthaben;
     }
     
 }

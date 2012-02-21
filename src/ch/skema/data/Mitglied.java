@@ -60,6 +60,8 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @Column(name = "ZAHLUNGSFAELLIGKEIT")
     @Temporal(TemporalType.DATE)
     private Date zahlungsfaelligkeit;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
+    private Collection<Vertragsstop> vertragsstopCollection;
     
     @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -386,7 +388,14 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     public void setZahlungsfaelligkeit(Date zahlungsfaelligkeit) {
         this.zahlungsfaelligkeit = zahlungsfaelligkeit;
     }
+
+    @XmlTransient
+    public Collection<Vertragsstop> getVertragsstopCollection() {
+        return vertragsstopCollection;
+    }
+
+    public void setVertragsstopCollection(Collection<Vertragsstop> vertragsstopCollection) {
+        this.vertragsstopCollection = vertragsstopCollection;
+    }
     
-    
-        
 }
