@@ -54,7 +54,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findByEintrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.eintrittsdatum = :eintrittsdatum"),
     @NamedQuery(name = "Mitglied.findByTribe", query = "SELECT m FROM Mitglied m WHERE m.tribe = :tribe"),
     @NamedQuery(name = "Mitglied.findByFamilienrabat", query = "SELECT m FROM Mitglied m WHERE m.familienrabat = :familienrabat"),
-    @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum")})
+    @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum"),
+    @NamedQuery(name = "Mitglied.findAllOffeneRechnung", query = "SELECT m FROM Mitglied m WHERE m.id in(SELECT r.mitgliedid.id from Rechnung r where r.eingang is null)")})
+
+
 public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
    
     @Column(name = "ZAHLUNGSFAELLIGKEIT")
