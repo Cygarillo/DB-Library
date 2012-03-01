@@ -81,6 +81,12 @@ public class Settings implements Serializable {
     private Integer nachgeburtstag;
     @Column(name = "WOCHENZAHLFUERNEUEMEMBERGEBUER")
     private Integer wochenzahlFuerNeueMembergebuehr;
+    @Column(name = "ISTELMSHOWN")
+    private Boolean isTelmShown;
+    @Column(name = "ISTELGSHOWN")
+    private Boolean isTelgShown;
+    @Column(name = "ISTELPSHOWN")
+    private Boolean isTelpShown;
 
     public Settings() {
     }
@@ -271,6 +277,18 @@ public class Settings implements Serializable {
 
     public void setWochenzahlFuerNeueMembergebuehr(Integer wochenzahlFuerNeueMembergebuehr) {
         this.wochenzahlFuerNeueMembergebuehr = wochenzahlFuerNeueMembergebuehr;
+    }
+    
+    public boolean isTelpShown() {
+        return isTelpShown;
+    }
+    
+    public boolean isTelgShown() {
+        return isTelgShown;
+    }
+    
+    public boolean isTelmShown() {
+        return isTelmShown;
     }
     
 }
