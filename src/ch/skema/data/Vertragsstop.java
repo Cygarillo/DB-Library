@@ -5,6 +5,7 @@
 package ch.skema.data;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,17 +35,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vertragsstop.findByMitgliedId", query = "SELECT v FROM Vertragsstop v WHERE v.mitgliedid = :id"),
     @NamedQuery(name = "Vertragsstop.findByStartdatum", query = "SELECT v FROM Vertragsstop v WHERE v.startdatum = :startdatum"),
     @NamedQuery(name = "Vertragsstop.findByEnddatum", query = "SELECT v FROM Vertragsstop v WHERE v.enddatum = :enddatum")})
-public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterface {
-    @Basic(optional =     false)
+public class Vertragsstop implements Serializable, MitgliederDBPersistenceInterface {
+
+    @Basic(optional = false)
     @Column(name = "STARTDATUM")
     @Temporal(TemporalType.DATE)
     private Date startdatum;
-    @Basic(optional =     false)
+    @Basic(optional = false)
     @Column(name = "ENDDATUM")
     @Temporal(TemporalType.DATE)
     private Date enddatum;
-    @Column(name = "GUTHABEN")
-    private Integer guthaben;
+//    @Column(name = "GUTHABEN")
+//    private Integer guthaben;
     @JoinColumn(name = "MITGLIEDID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Mitglied mitgliedid;
@@ -54,7 +56,6 @@ public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterfa
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    
 
     public Vertragsstop() {
     }
@@ -76,8 +77,6 @@ public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterfa
     public void setId(Integer id) {
         this.id = id;
     }
-
-
 
     @Override
     public int hashCode() {
@@ -128,12 +127,30 @@ public class Vertragsstop implements Serializable,MitgliederDBPersistenceInterfa
         this.enddatum = enddatum;
     }
 
-    public Integer getGuthaben() {
-        return guthaben;
+    public long getGuthaben() {
+        return daysBetween(startdatum, enddatum);
     }
 
-    public void setGuthaben(Integer guthaben) {
-        this.guthaben = guthaben;
-    }
+//    public void setGuthaben(Integer guthaben) {
+//        this.guthaben = guthaben;
+//    }
     
+    
+    private long daysBetween(Calendar startDate, Calendar endDate) {
+        Calendar date = (Calendar) startDate.clone();
+        long daysBetween = 0;
+        while (date.before(endDate)) {
+            date.add(Calendar.DAY_OF_MONTH, 1);
+            daysBetween++;
+        }
+        return daysBetween;
+    }
+
+    private long daysBetween(Date startdatum, Date enddatum) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(startdatum);
+        c2.setTime(enddatum);;
+        return daysBetween(c1, c2);
+    }
 }

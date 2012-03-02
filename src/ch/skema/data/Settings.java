@@ -6,6 +6,7 @@ package ch.skema.data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Properties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,6 +63,9 @@ public class Settings implements Serializable {
     private String colorkombi;
     @Column(name = "STANDORT")
     private String standort;
+    
+    @Column(name = "MITGLIEDMAINVIEWTABLESETTINGS")
+    private Properties MitgliedMainViewTableSettings;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -289,6 +293,26 @@ public class Settings implements Serializable {
     
     public boolean isTelmShown() {
         return isTelmShown;
+    }
+    
+     public void setTelpShown(Boolean b) {
+        isTelpShown = b;
+    }
+
+    public void setTelmShown(Boolean b) {
+        isTelmShown = b;
+    }
+    public void setTelgShown(Boolean b) {
+        isTelgShown = b;
+    }
+    
+    
+    public Properties getMitgliedMainViewTableProperties(){
+        return MitgliedMainViewTableSettings;
+    }
+
+    public void setMitgliedMainViewTableSettings(Properties MitgliedMainViewTableSettings) {
+        this.MitgliedMainViewTableSettings = MitgliedMainViewTableSettings;
     }
     
 }
