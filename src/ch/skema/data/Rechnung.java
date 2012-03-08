@@ -45,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rechnung.findByMitglied", query = "SELECT r FROM Rechnung r WHERE r.mitgliedid = :id"),
     @NamedQuery(name = "Rechnung.findByFaelligkeit", query = "SELECT r FROM Rechnung r WHERE r.faelligkeit = :faelligkeit"),
     @NamedQuery(name = "Rechnung.findByEingang", query = "SELECT r FROM Rechnung r WHERE r.eingang = :eingang"),
+    @NamedQuery(name = "Rechnung.findOffenen", query = "SELECT r FROM Rechnung r WHERE r.mitgliedid.id in (SELECT m.id FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.aktiv = true) and m.austrittsdatum is null) and r.eingang IS NULL"),
     @NamedQuery(name = "Rechnung.findByEsr", query = "SELECT r FROM Rechnung r WHERE r.esr = :esr"),
     @NamedQuery(name = "Rechnung.findByNotiz", query = "SELECT r FROM Rechnung r WHERE r.notiz = :notiz")})
 public class Rechnung implements Serializable, MitgliederDBPersistenceInterface {

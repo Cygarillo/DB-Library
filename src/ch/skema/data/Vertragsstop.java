@@ -127,7 +127,7 @@ public class Vertragsstop implements Serializable, MitgliederDBPersistenceInterf
         this.enddatum = enddatum;
     }
 
-    public long getGuthaben() {
+    public Integer getGuthaben() {
         return daysBetween(startdatum, enddatum);
     }
 
@@ -136,9 +136,9 @@ public class Vertragsstop implements Serializable, MitgliederDBPersistenceInterf
 //    }
     
     
-    private long daysBetween(Calendar startDate, Calendar endDate) {
+    private Integer daysBetween(Calendar startDate, Calendar endDate) {
         Calendar date = (Calendar) startDate.clone();
-        long daysBetween = 0;
+        Integer daysBetween = 0;
         while (date.before(endDate)) {
             date.add(Calendar.DAY_OF_MONTH, 1);
             daysBetween++;
@@ -146,7 +146,7 @@ public class Vertragsstop implements Serializable, MitgliederDBPersistenceInterf
         return daysBetween;
     }
 
-    private long daysBetween(Date startdatum, Date enddatum) {
+    private Integer daysBetween(Date startdatum, Date enddatum) {
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         c1.setTime(startdatum);
