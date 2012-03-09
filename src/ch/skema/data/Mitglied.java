@@ -5,24 +5,9 @@
 package ch.skema.data;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.text.DateFormat;
+import java.util.*;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Cyrill
  */
 @Entity
-@Table(name = "MITGLIED", catalog = "MITGLIEDERDB", schema = "PUBLIC") 
+@Table(name = "MITGLIED", catalog = "MITGLIEDERDB", schema = "PUBLIC")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mitglied.findAll", query = "SELECT m FROM Mitglied m"),
@@ -58,10 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findByFamilienrabat", query = "SELECT m FROM Mitglied m WHERE m.familienrabat = :familienrabat"),
     @NamedQuery(name = "Mitglied.findByAustrittsdatum", query = "SELECT m FROM Mitglied m WHERE m.austrittsdatum = :austrittsdatum"),
     @NamedQuery(name = "Mitglied.findAllOffeneRechnung", query = "SELECT m FROM Mitglied m WHERE m.id in(SELECT r.mitgliedid.id from Rechnung r where r.eingang is null)")})
+public class Mitglied implements Serializable, MitgliederDBPersistenceInterface {
 
-
-public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
-   
     @Column(name = "ZAHLUNGSFAELLIGKEIT")
     @Temporal(TemporalType.DATE)
     private Date zahlungsfaelligkeit;
@@ -72,9 +55,9 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @Column(name = "RECHNUNGSSTRASSE")
     private String rechnungsstrasse;
     @Column(name = "RECHNUNGSPLZ")
-    private String rechnungsplz;
+    private Integer rechnungsplz;
     @Column(name = "RECHNUNGSORT")
-    private Integer rechnungsort;
+    private String rechnungsort;
     @Column(name = "PRIVATSCHUELER")
     private boolean privatschüler;
     @OneToMany(mappedBy = "mitgliedid")
@@ -83,7 +66,6 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     private Collection<Privatstunde> privatstundeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
     private Collection<Vertragsstop> vertragsstopCollection;
-    
     @JoinColumn(name = "INTERVALLID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Zahlungsintervall intervallid;
@@ -146,10 +128,9 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     private Zahlungskategorie zahlungskategorieid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
     private Collection<Pruefung> pruefungCollection;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliederid")
     private Collection<Membergebuehr> memberGebuehrCollection;
-    
+
     public Mitglied() {
     }
 
@@ -268,8 +249,6 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.tribe = tribe;
     }
 
-
-
     public boolean getFamilienrabat() {
         return familienrabat;
     }
@@ -380,8 +359,6 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         return "ch.skema.data.Mitglied[ id=" + id + " ]";
     }
 
-
-
     @XmlTransient
     public Collection<Membergebuehr> getMembergebuehrCollection() {
         return memberGebuehrCollection;
@@ -390,8 +367,6 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     public void setMembergebuehrCollection(Collection<Membergebuehr> member1Collection) {
         this.memberGebuehrCollection = member1Collection;
     }
-
-    
 
     public Zahlungsintervall getIntervallid() {
         return intervallid;
@@ -409,7 +384,6 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     public void setVertragsstopCollection(Collection<Vertragsstop> vertragsstopCollection) {
         this.vertragsstopCollection = vertragsstopCollection;
     }
-
 
     public Date getZahlungsfaelligkeit() {
         return zahlungsfaelligkeit;
@@ -443,19 +417,19 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.rechnungsstrasse = rechnungsstrasse;
     }
 
-    public String getRechnungsplz() {
+    public Integer getRechnungsplz() {
         return rechnungsplz;
     }
 
-    public void setRechnungsplz(String rechnungsplz) {
+    public void setRechnungsplz(Integer rechnungsplz) {
         this.rechnungsplz = rechnungsplz;
     }
 
-    public Integer getRechnungsort() {
+    public String getRechnungsort() {
         return rechnungsort;
     }
 
-    public void setRechnungsort(Integer rechnungsort) {
+    public void setRechnungsort(String rechnungsort) {
         this.rechnungsort = rechnungsort;
     }
 
@@ -484,5 +458,87 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     public void setPrivatstundeCollection(Collection<Privatstunde> privatstundeCollection) {
         this.privatstundeCollection = privatstundeCollection;
     }
+
+    public HashMap<String, String> getAnrede() {
+        HashMap<String, String> anrede = new HashMap<String, String>();
+        String emptyVal = "";
+
+        if (userechnungsadresse) {
+             if (getRechnungsanschrift() != null) {
+                anrede.put("%Vorname%", getRechnungsanschrift());
+            } else {
+                anrede.put("%Vorname%", emptyVal);
+            }
+                anrede.put("%Name%", emptyVal);
+            if (getRechnungsstrasse() != null) {
+                anrede.put("%Adresse%", getRechnungsstrasse());
+            } else {
+                anrede.put("%Adresse%", emptyVal);
+            }
+            if (getRechnungsplz() != null) {
+                anrede.put("%Plz%", Integer.toString(getRechnungsplz()));
+            } else {
+                anrede.put("%Plz%", emptyVal);
+            }
+            if (getRechnungsort() != null) {
+                anrede.put("%Ort%", getRechnungsort());
+            } else {
+                anrede.put("%Ort%", emptyVal);
+            }
+        } else {
+
+
+            if (getVorname() != null) {
+                anrede.put("%Vorname%", getVorname());
+            } else {
+                anrede.put("%Vorname%", emptyVal);
+            }
+            if (getName() != null) {
+                anrede.put("%Name%", getName());
+            } else {
+                anrede.put("%Name%", emptyVal);
+            }
+            if (getStrasse() != null) {
+                anrede.put("%Adresse%", getStrasse());
+            } else {
+                anrede.put("%Adresse%", emptyVal);
+            }
+            if (getPlz() != null) {
+                anrede.put("%Plz%", Integer.toString(getPlz()));
+            } else {
+                anrede.put("%Plz%", emptyVal);
+            }
+            if (getOrt() != null) {
+                anrede.put("%Ort%", getOrt());
+            } else {
+                anrede.put("%Ort%", emptyVal);
+            }
+
+        }
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.GERMAN);
+        anrede.put("%Datum%", df.format(Calendar.getInstance().getTime()).toString());
+
+        return anrede;
+
+    }
     
+    public Date getLetzteZahlung(Mitglied m) {
+        
+        Date d = null;
+
+        for (Rechnung r : rechnungCollection) {
+            if (r.getEingang() != null) {
+                if (d == null) {
+                    d = r.getEingang();
+                } else {
+                    if (d.before(r.getEingang())) {
+                        d = r.getEingang();
+                    }
+                }
+            }
+
+        }
+        return d;
+
+    }
 }
