@@ -21,5 +21,8 @@
     <class>ch.skema.data.Settings</class>
     <class>ch.skema.data.Abrechnung</class>
     <class>ch.skema.data.Membergebuehr</class>
+    <class>ch.skema.data.Dokumentvorlage</class>
+    <class>ch.skema.data.Dokument</class>
+    <class>ch.skema.data.Privatstunde</class>
   </persistence-unit>
 </persistence>

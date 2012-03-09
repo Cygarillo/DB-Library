@@ -65,6 +65,22 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @Column(name = "ZAHLUNGSFAELLIGKEIT")
     @Temporal(TemporalType.DATE)
     private Date zahlungsfaelligkeit;
+    @Column(name = "USERECHNUNGSADRESSE")
+    private Serializable userechnungsadresse;
+    @Column(name = "RECHNUNGSANSCHRIFT")
+    private String rechnungsanschrift;
+    @Column(name = "RECHNUNGSSTRASSE")
+    private String rechnungsstrasse;
+    @Column(name = "RECHNUNGSPLZ")
+    private String rechnungsplz;
+    @Column(name = "RECHNUNGSORT")
+    private Integer rechnungsort;
+    @Column(name = "PRIVATSCHUELER")
+    private boolean privatschüler;
+    @OneToMany(mappedBy = "mitgliedid")
+    private Collection<Dokument> dokumentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
+    private Collection<Privatstunde> privatstundeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
     private Collection<Vertragsstop> vertragsstopCollection;
     
@@ -385,6 +401,15 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.intervallid = intervallid;
     }
 
+    @XmlTransient
+    public Collection<Vertragsstop> getVertragsstopCollection() {
+        return vertragsstopCollection;
+    }
+
+    public void setVertragsstopCollection(Collection<Vertragsstop> vertragsstopCollection) {
+        this.vertragsstopCollection = vertragsstopCollection;
+    }
+
 
     public Date getZahlungsfaelligkeit() {
         return zahlungsfaelligkeit;
@@ -394,13 +419,70 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.zahlungsfaelligkeit = zahlungsfaelligkeit;
     }
 
-    @XmlTransient
-    public Collection<Vertragsstop> getVertragsstopCollection() {
-        return vertragsstopCollection;
+    public Serializable getUserechnungsadresse() {
+        return userechnungsadresse;
     }
 
-    public void setVertragsstopCollection(Collection<Vertragsstop> vertragsstopCollection) {
-        this.vertragsstopCollection = vertragsstopCollection;
+    public void setUserechnungsadresse(Serializable userechnungsadresse) {
+        this.userechnungsadresse = userechnungsadresse;
+    }
+
+    public String getRechnungsanschrift() {
+        return rechnungsanschrift;
+    }
+
+    public void setRechnungsanschrift(String rechnungsanschrift) {
+        this.rechnungsanschrift = rechnungsanschrift;
+    }
+
+    public String getRechnungsstrasse() {
+        return rechnungsstrasse;
+    }
+
+    public void setRechnungsstrasse(String rechnungsstrasse) {
+        this.rechnungsstrasse = rechnungsstrasse;
+    }
+
+    public String getRechnungsplz() {
+        return rechnungsplz;
+    }
+
+    public void setRechnungsplz(String rechnungsplz) {
+        this.rechnungsplz = rechnungsplz;
+    }
+
+    public Integer getRechnungsort() {
+        return rechnungsort;
+    }
+
+    public void setRechnungsort(Integer rechnungsort) {
+        this.rechnungsort = rechnungsort;
+    }
+
+    public boolean getPrivatschueler() {
+        return privatschüler;
+    }
+
+    public void setPrivatschüler(boolean privatschüler) {
+        this.privatschüler = privatschüler;
+    }
+
+    @XmlTransient
+    public Collection<Dokument> getDokumentCollection() {
+        return dokumentCollection;
+    }
+
+    public void setDokumentCollection(Collection<Dokument> dokumentCollection) {
+        this.dokumentCollection = dokumentCollection;
+    }
+
+    @XmlTransient
+    public Collection<Privatstunde> getPrivatstundeCollection() {
+        return privatstundeCollection;
+    }
+
+    public void setPrivatstundeCollection(Collection<Privatstunde> privatstundeCollection) {
+        this.privatstundeCollection = privatstundeCollection;
     }
     
 }
