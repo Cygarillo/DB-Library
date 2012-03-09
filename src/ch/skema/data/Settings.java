@@ -91,6 +91,11 @@ public class Settings implements Serializable {
     private Boolean isTelgShown;
     @Column(name = "ISTELPSHOWN")
     private Boolean isTelpShown;
+    
+    @Column(name = "ANZAHLPRIVATSTUNDENANZEIGEN")
+    private Integer anzahlPrivatStundenAnzeigen;
+    @Column(name = "ANZAHLRECHNUNGENPROMITGLIEDANZEIGEN")
+    private Integer anzahlRechnungenProMitgliedAnzeigen;
 
     public Settings() {
     }
@@ -313,6 +318,22 @@ public class Settings implements Serializable {
 
     public void setMitgliedMainViewTableSettings(Properties MitgliedMainViewTableSettings) {
         this.MitgliedMainViewTableSettings = MitgliedMainViewTableSettings;
+    }
+
+    public Integer getAnzahlPrivatStundenAnzeigen() {
+        return anzahlPrivatStundenAnzeigen;
+    }
+
+    public void setAnzahlPrivatStundenAnzeigen(Integer anzahlPrivatStundenAnzeigen) {
+        this.anzahlPrivatStundenAnzeigen = anzahlPrivatStundenAnzeigen;
+    }
+
+    public Integer getAnzahlRechnungenProMitgliedAnzeigen() {
+        return anzahlRechnungenProMitgliedAnzeigen;
+    }
+
+    public void setAnzahlRechnungenProMitgliedAnzeigen(Integer anzahlRechnungenProMitgliedAnzeigen) {
+        this.anzahlRechnungenProMitgliedAnzeigen = anzahlRechnungenProMitgliedAnzeigen;
     }
     
 }

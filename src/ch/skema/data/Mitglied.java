@@ -66,7 +66,7 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
     @Temporal(TemporalType.DATE)
     private Date zahlungsfaelligkeit;
     @Column(name = "USERECHNUNGSADRESSE")
-    private Serializable userechnungsadresse;
+    private boolean userechnungsadresse;
     @Column(name = "RECHNUNGSANSCHRIFT")
     private String rechnungsanschrift;
     @Column(name = "RECHNUNGSSTRASSE")
@@ -419,11 +419,11 @@ public class Mitglied implements Serializable ,MitgliederDBPersistenceInterface{
         this.zahlungsfaelligkeit = zahlungsfaelligkeit;
     }
 
-    public Serializable getUserechnungsadresse() {
+    public boolean getUserechnungsadresse() {
         return userechnungsadresse;
     }
 
-    public void setUserechnungsadresse(Serializable userechnungsadresse) {
+    public void setUserechnungsadresse(boolean userechnungsadresse) {
         this.userechnungsadresse = userechnungsadresse;
     }
 
