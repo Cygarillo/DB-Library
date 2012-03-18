@@ -536,9 +536,17 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
                     }
                 }
             }
-
         }
         return d;
-
+        
+    }
+    
+    public boolean isPassiv(){
+        
+       for(Vertrag vertrag: vertragCollection){
+           if(vertrag.getAktiv())
+               return false;
+       }
+       return true;
     }
 }

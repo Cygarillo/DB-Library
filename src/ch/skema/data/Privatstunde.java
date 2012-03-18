@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Privatstunde.findAll", query = "SELECT p FROM Privatstunde p"),
     @NamedQuery(name = "Privatstunde.findByPrivatstundeid", query = "SELECT p FROM Privatstunde p WHERE p.privatstundeid = :privatstundeid"),
     @NamedQuery(name = "Privatstunde.findByDatum", query = "SELECT p FROM Privatstunde p WHERE p.datum = :datum"),
+    @NamedQuery(name = "Privatstunde.findByMitglied", query = "SELECT p FROM Privatstunde p WHERE p.mitgliedid = :id"),
     @NamedQuery(name = "Privatstunde.findByZeit", query = "SELECT p FROM Privatstunde p WHERE p.zeit = :zeit")})
 public class Privatstunde implements Serializable {
     private static final long serialVersionUID = 1L;
