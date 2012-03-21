@@ -23,11 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Privatstunde.findByMitglied", query = "SELECT p FROM Privatstunde p WHERE p.mitgliedid = :id"),
     @NamedQuery(name = "Privatstunde.findByZeit", query = "SELECT p FROM Privatstunde p WHERE p.zeit = :zeit")})
 public class Privatstunde implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "PRIVATSTUNDEID")
-    private Integer privatstundeid;
     @Column(name = "DATUM")
     @Temporal(TemporalType.DATE)
     private Date datum;
@@ -36,7 +31,13 @@ public class Privatstunde implements Serializable {
     private Date zeit;
     @Lob
     @Column(name = "NOTIZ")
-    private String notiz;
+    private Serializable notiz;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "PRIVATSTUNDEID")
+    private Integer privatstundeid;
     @JoinColumn(name = "MITGLIEDID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Mitglied mitgliedid;
@@ -54,30 +55,6 @@ public class Privatstunde implements Serializable {
 
     public void setPrivatstundeid(Integer privatstundeid) {
         this.privatstundeid = privatstundeid;
-    }
-
-    public Date getDatum() {
-        return datum;
-    }
-
-    public void setDatum(Date datum) {
-        this.datum = datum;
-    }
-
-    public Date getZeit() {
-        return zeit;
-    }
-
-    public void setZeit(Date zeit) {
-        this.zeit = zeit;
-    }
-
-    public String getNotiz() {
-        return notiz;
-    }
-
-    public void setNotiz(String notiz) {
-        this.notiz = notiz;
     }
 
     public Mitglied getMitgliedid() {
@@ -111,6 +88,30 @@ public class Privatstunde implements Serializable {
     @Override
     public String toString() {
         return "ch.skema.data.Privatstunde[ privatstundeid=" + privatstundeid + " ]";
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public Date getZeit() {
+        return zeit;
+    }
+
+    public void setZeit(Date zeit) {
+        this.zeit = zeit;
+    }
+
+    public String getNotiz() {
+        return (String)notiz;
+    }
+
+    public void setNotiz(String notiz) {
+        this.notiz = notiz;
     }
     
 }
