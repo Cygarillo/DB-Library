@@ -43,6 +43,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Abrechnung.findByErstelldatum", query = "SELECT a FROM Abrechnung a WHERE a.erstelldatum = :erstelldatum"),
     @NamedQuery(name = "Abrechnung.findByAbrechnungsdatum", query = "SELECT a FROM Abrechnung a WHERE a.abrechnungsdatum = :abrechnungsdatum")})
 public class Abrechnung implements Serializable, MitgliederDBPersistenceInterface  {
+    @Column(name = "ERSTELLDATUM")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date erstelldatum;
+    @Column(name = "ABRECHNUNGSDATUM")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date abrechnungsdatum;
+    @Column(name = "PRIVATSTUNDEN")
+    private Integer privatstunden;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -74,12 +82,6 @@ public class Abrechnung implements Serializable, MitgliederDBPersistenceInterfac
     private Integer memberjugend;
     @Column(name = "VERTRAGTOTAL")
     private Integer vertragtotal;
-    @Column(name = "ERSTELLDATUM")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date erstelldatum;
-    @Column(name = "ABRECHNUNGSDATUM")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date abrechnungsdatum;
 
     public Abrechnung() {
     }
@@ -200,22 +202,6 @@ public class Abrechnung implements Serializable, MitgliederDBPersistenceInterfac
         this.vertragtotal = vertragtotal;
     }
 
-    public Date getErstelldatum() {
-        return erstelldatum;
-    }
-
-    public void setErstelldatum(Date erstelldatum) {
-        this.erstelldatum = erstelldatum;
-    }
-
-    public Date getAbrechnungsdatum() {
-        return abrechnungsdatum;
-    }
-
-    public void setAbrechnungsdatum(Date abrechnungsdatum) {
-        this.abrechnungsdatum = abrechnungsdatum;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -239,6 +225,30 @@ public class Abrechnung implements Serializable, MitgliederDBPersistenceInterfac
     @Override
     public String toString() {
         return "ch.skema.data.Abrechnung[ id=" + id + " ]";
+    }
+
+    public Date getErstelldatum() {
+        return erstelldatum;
+    }
+
+    public void setErstelldatum(Date erstelldatum) {
+        this.erstelldatum = erstelldatum;
+    }
+
+    public Date getAbrechnungsdatum() {
+        return abrechnungsdatum;
+    }
+
+    public void setAbrechnungsdatum(Date abrechnungsdatum) {
+        this.abrechnungsdatum = abrechnungsdatum;
+    }
+
+    public Integer getPrivatstunden() {
+        return privatstunden;
+    }
+
+    public void setPrivatstunden(Integer privatstunden) {
+        this.privatstunden = privatstunden;
     }
     
 }
