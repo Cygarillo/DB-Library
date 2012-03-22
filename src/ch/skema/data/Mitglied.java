@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findAllByRubrik", query = "SELECT m FROM Mitglied m  where m.id in (SELECT v.mitgliederid.id FROM Vertrag v where v.rubrikid = :rubrik)"),
     @NamedQuery(name = "Mitglied.findAllByPruefungslevelId", query = "SELECT m FROM Mitglied m  where m.id in (SELECT p.mitgliedid.id FROM Pruefung p where p.pruefungslevelid.id = :id)"),
     @NamedQuery(name = "Mitglied.findAllOhnePruefung", query = "SELECT m FROM Mitglied m where m.id not in (SELECT p.mitgliedid.id FROM Pruefung p)"),
+    @NamedQuery(name = "Mitglied.findAllPrivatschueler", query = "SELECT m FROM Mitglied m where m.privatschueler = true"),
     @NamedQuery(name = "Mitglied.findById", query = "SELECT m FROM Mitglied m WHERE m.id = :id"),
     @NamedQuery(name = "Mitglied.findByZahlungskategorie", query = "SELECT m FROM Mitglied m WHERE m.zahlungskategorieid = :zahlungskategorie"),
     @NamedQuery(name = "Mitglied.findByName", query = "SELECT m FROM Mitglied m WHERE m.name = :name"),
@@ -45,11 +46,34 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findAllOffeneRechnung", query = "SELECT m FROM Mitglied m WHERE m.id in(SELECT r.mitgliedid.id from Rechnung r where r.eingang is null)")})
 public class Mitglied implements Serializable, MitgliederDBPersistenceInterface {
 
+    @Column(name =     "GEBURTSTAG")
+    @Temporal(TemporalType.DATE)
+    private Date geburtstag;
+    @Column(name = "EINTRITTSDATUM")
+    @Temporal(TemporalType.DATE)
+    private Date eintrittsdatum;
+    @Column(name = "TRIBE")
+    private boolean tribe;
+    @Column(name = "JAHRESLIZENZ")
+    @Temporal(TemporalType.DATE)
+    private Date jahreslizenz;
+    @Column(name = "JAHRESLIZENZABGERECHNET")
+    private boolean jahreslizenzabgerechnet;
+    @Column(name = "FAMILIENRABAT")
+    private boolean familienrabat;
+    @Column(name = "AUSTRITTSDATUM")
+    @Temporal(TemporalType.DATE)
+    private Date austrittsdatum;
+    @Lob
+    @Column(name = "BILD")
+    private byte[] bild;
     @Column(name = "ZAHLUNGSFAELLIGKEIT")
     @Temporal(TemporalType.DATE)
     private Date zahlungsfaelligkeit;
     @Column(name = "USERECHNUNGSADRESSE")
     private boolean userechnungsadresse;
+    @Column(name = "PRIVATSCHUELER")
+    private boolean privatschueler;
     @Column(name = "RECHNUNGSANSCHRIFT")
     private String rechnungsanschrift;
     @Column(name = "RECHNUNGSSTRASSE")
@@ -58,8 +82,6 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
     private Integer rechnungsplz;
     @Column(name = "RECHNUNGSORT")
     private String rechnungsort;
-    @Column(name = "PRIVATSCHUELER")
-    private boolean privatschüler;
     @OneToMany(mappedBy = "mitgliedid")
     private Collection<Dokument> dokumentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
@@ -95,26 +117,9 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
     private String telm;
     @Column(name = "EMAIL")
     private String email;
-    @Column(name = "GEBURTSTAG")
-    @Temporal(TemporalType.DATE)
-    private Date geburtstag;
-    @Basic(optional = false)
-    @Column(name = "EINTRITTSDATUM")
-    @Temporal(TemporalType.DATE)
-    private Date eintrittsdatum;
-    @Column(name = "TRIBE")
-    private boolean tribe;
-    @Column(name = "FAMILIENRABAT")
-    private boolean familienrabat;
-    @Column(name = "AUSTRITTSDATUM")
-    @Temporal(TemporalType.DATE)
-    private Date austrittsdatum;
     @Lob
     @Column(name = "NOTIZ")
     private String notiz;
-    @Lob
-    @Column(name = "BILD")
-    private byte[] bild;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliederid")
     private Collection<Vertrag> vertragCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliedid")
@@ -434,11 +439,11 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
     }
 
     public boolean getPrivatschueler() {
-        return privatschüler;
+        return privatschueler;
     }
 
-    public void setPrivatschüler(boolean privatschüler) {
-        this.privatschüler = privatschüler;
+    public void setPrivatschüler(boolean privatschueler) {
+        this.privatschueler = privatschueler;
     }
 
     @XmlTransient
@@ -549,4 +554,5 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
        }
        return true;
     }
+
 }
