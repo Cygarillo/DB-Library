@@ -7,15 +7,7 @@ package ch.skema.data;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Properties;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -38,17 +30,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Settings.findByAutomemberrechnung", query = "SELECT s FROM Settings s WHERE s.automemberrechnung = :automemberrechnung")})
 public class Settings implements Serializable {
     @Column(name = "KINDERJUGENDVORLAGE")
-    private Boolean kinderjugendvorlage;
+    private boolean kinderjugendvorlage;
     @Column(name = "AUTOMEMBERRECHNUNG")
-    private Boolean automemberrechnung;
+    private boolean automemberrechnung;
     @Column(name = "EIGENEERSTEMAHNUNG")
-    private Boolean eigeneerstemahnung;
+    private boolean eigeneerstemahnung;
     @Column(name = "LASTSTARTED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date laststarted;
-    @Column(name = "LASTBACKUP")
+    @Column(name =     "LASTBACKUP")
     @Temporal(TemporalType.DATE)
     private Date lastbackup;
+   
+    @Lob
+    @Column(name = "MITGLIEDMAINVIEWTABLESETTINGS")
+    private Serializable mitgliedmainviewtablesettings;
+    
     @Column(name = "COLORWINGCHUN")
     private String colorwingchun;
     @Column(name = "COLORESKRIMA")
@@ -64,8 +61,7 @@ public class Settings implements Serializable {
     @Column(name = "STANDORT")
     private String standort;
     
-    @Column(name = "MITGLIEDMAINVIEWTABLESETTINGS")
-    private Properties MitgliedMainViewTableSettings;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -312,13 +308,7 @@ public class Settings implements Serializable {
     }
     
     
-    public Properties getMitgliedMainViewTableProperties(){
-        return MitgliedMainViewTableSettings;
-    }
-
-    public void setMitgliedMainViewTableSettings(Properties MitgliedMainViewTableSettings) {
-        this.MitgliedMainViewTableSettings = MitgliedMainViewTableSettings;
-    }
+    
 
     public Integer getAnzahlPrivatStundenAnzeigen() {
         return anzahlPrivatStundenAnzeigen;
@@ -335,5 +325,17 @@ public class Settings implements Serializable {
     public void setAnzahlRechnungenProMitgliedAnzeigen(Integer anzahlRechnungenProMitgliedAnzeigen) {
         this.anzahlRechnungenProMitgliedAnzeigen = anzahlRechnungenProMitgliedAnzeigen;
     }
+
+ 
+
+    public Serializable getMitgliedmainviewtablesettings() {
+        return mitgliedmainviewtablesettings;
+    }
+
+    public void setMitgliedmainviewtablesettings(Serializable mitgliedmainviewtablesettings) {
+        this.mitgliedmainviewtablesettings = mitgliedmainviewtablesettings;
+    }
+
+    
     
 }
