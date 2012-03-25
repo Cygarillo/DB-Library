@@ -6,7 +6,6 @@ package ch.skema.data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Properties;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -45,6 +44,13 @@ public class Settings implements Serializable {
     @Lob
     @Column(name = "MITGLIEDMAINVIEWTABLESETTINGS")
     private Serializable mitgliedmainviewtablesettings;
+    
+    
+            @Lob
+    @Column(name = "CUSTOMDOCUMENTROOT")
+    private String customdocumentroot;
+
+    
     
     @Column(name = "COLORWINGCHUN")
     private String colorwingchun;
@@ -325,7 +331,6 @@ public class Settings implements Serializable {
     public void setAnzahlRechnungenProMitgliedAnzeigen(Integer anzahlRechnungenProMitgliedAnzeigen) {
         this.anzahlRechnungenProMitgliedAnzeigen = anzahlRechnungenProMitgliedAnzeigen;
     }
-
  
 
     public Serializable getMitgliedmainviewtablesettings() {
@@ -336,6 +341,12 @@ public class Settings implements Serializable {
         this.mitgliedmainviewtablesettings = mitgliedmainviewtablesettings;
     }
 
-    
+    public String getCustomdocumentroot() {
+        return customdocumentroot;
+    }
+
+    public void setCustomdocumentroot(String customdocumentroot) {
+        this.customdocumentroot = customdocumentroot;
+    }
     
 }
