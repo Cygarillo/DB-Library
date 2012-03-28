@@ -25,11 +25,13 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Dokumentvorlage implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "DOKUMENTVORLAGEID")
     private Integer dokumentvorlageid;
     @Column(name = "NAME")
     private String name;
+    @Lob
     @Column(name = "UEBERSCHRIFT")
     private String ueberschrift;
     @Lob
