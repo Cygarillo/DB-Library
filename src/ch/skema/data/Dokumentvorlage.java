@@ -110,7 +110,7 @@ public class Dokumentvorlage implements Serializable {
 
     @Override
     public String toString() {
-        return "ch.skema.data.Dokumentvorlage[ dokumentvorlageid=" + dokumentvorlageid + " ]";
+        return name;
     }
     
 }

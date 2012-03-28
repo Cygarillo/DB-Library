@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Dokument.findAll", query = "SELECT d FROM Dokument d"),
     @NamedQuery(name = "Dokument.findByDokumentid", query = "SELECT d FROM Dokument d WHERE d.dokumentid = :dokumentid"),
+    @NamedQuery(name = "Dokument.findByMitgliedid", query = "SELECT d FROM Dokument d WHERE d.mitgliedid = :mitglied"),
     @NamedQuery(name = "Dokument.findByDatum", query = "SELECT d FROM Dokument d WHERE d.datum = :datum")})
 public class Dokument implements Serializable {
     private static final long serialVersionUID = 1L;
