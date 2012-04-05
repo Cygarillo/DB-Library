@@ -527,7 +527,7 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
 
     }
     
-    public Date getLetzteZahlung(Mitglied m) {
+    public Date getLetzteZahlung() {
         
         Date d = null;
 
