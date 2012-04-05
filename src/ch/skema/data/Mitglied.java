@@ -361,7 +361,7 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
 
     @Override
     public String toString() {
-        return "ch.skema.data.Mitglied[ id=" + id + " ]";
+        return "ch.skema.data.Mitglied[ id=" + id + " ] : "+vorname + " "+name;
     }
 
     @XmlTransient

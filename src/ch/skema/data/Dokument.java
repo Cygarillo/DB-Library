@@ -102,4 +102,8 @@ public class Dokument implements Serializable {
         return "ch.skema.data.Dokument[ dokumentid=" + dokumentid + " ]";
     }
     
+    public String getDokname(){
+        return mitgliedid.getName()+mitgliedid.getVorname()+dokumentvorlageid.getName()+dokumentid.toString();
+    }
+    
 }

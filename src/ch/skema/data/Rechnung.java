@@ -59,7 +59,6 @@ public class Rechnung implements Serializable, MitgliederDBPersistenceInterface 
     private Date eingang;
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -179,6 +178,8 @@ public class Rechnung implements Serializable, MitgliederDBPersistenceInterface 
         this.eingang = eingang;
         fire("date", null, eingang);
     }
+    
+    //need propertychange listener to change logo if Eingang is set
     @Transient
     private List listeners = Collections.synchronizedList(new LinkedList());
 
@@ -196,5 +197,9 @@ public class Rechnung implements Serializable, MitgliederDBPersistenceInterface 
         for (int i = 0; i < pcls.length; i++) {
             pcls[i].propertyChange(new PropertyChangeEvent(this, propertyName, old, nue));
         }
+    }
+    
+    public String getDokname(){
+        return mitgliedid.getName()+mitgliedid.getVorname()+id.toString();
     }
 }

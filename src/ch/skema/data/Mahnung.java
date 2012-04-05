@@ -109,4 +109,8 @@ public class Mahnung implements Serializable,MitgliederDBPersistenceInterface {
         return "ch.skema.data.Mahnung[ id=" + id + " ]";
     }
     
+    public String getDokname(){
+        return rechnungid.getMitgliedid().getName()+rechnungid.getMitgliedid().getVorname()+id.toString();
+    }
+    
 }
