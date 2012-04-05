@@ -93,7 +93,7 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
     private Zahlungsintervall intervallid;
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
