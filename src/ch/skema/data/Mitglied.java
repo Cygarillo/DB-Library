@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mitglied.findAllOffeneRechnung", query = "SELECT m FROM Mitglied m WHERE m.id in(SELECT r.mitgliedid.id from Rechnung r where r.eingang is null)")})
 public class Mitglied implements Serializable, MitgliederDBPersistenceInterface {
 
-    @Column(name =     "GEBURTSTAG")
+    @Column(name = "GEBURTSTAG")
     @Temporal(TemporalType.DATE)
     private Date geburtstag;
     @Column(name = "EINTRITTSDATUM")
@@ -135,6 +135,9 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
     private Collection<Pruefung> pruefungCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mitgliederid")
     private Collection<Membergebuehr> memberGebuehrCollection;
+    @Column(name = "LETZTEZAHLUNG")
+    @Temporal(TemporalType.DATE)
+    private Date letztezahlung;
 
     public Mitglied() {
     }
@@ -361,7 +364,7 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
 
     @Override
     public String toString() {
-        return "ch.skema.data.Mitglied[ id=" + id + " ] : "+vorname + " "+name;
+        return "ch.skema.data.Mitglied[ id=" + id + " ] : " + vorname + " " + name;
     }
 
     @XmlTransient
@@ -469,12 +472,12 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
         String emptyVal = "";
 
         if (userechnungsadresse) {
-             if (getRechnungsanschrift() != null) {
+            if (getRechnungsanschrift() != null) {
                 anrede.put("%Vorname%", getRechnungsanschrift());
             } else {
                 anrede.put("%Vorname%", emptyVal);
             }
-                anrede.put("%Name%", emptyVal);
+            anrede.put("%Name%", emptyVal);
             if (getRechnungsstrasse() != null) {
                 anrede.put("%Adresse%", getRechnungsstrasse());
             } else {
@@ -526,33 +529,39 @@ public class Mitglied implements Serializable, MitgliederDBPersistenceInterface 
         return anrede;
 
     }
-    
-    public Date getLetzteZahlung() {
-        
-        Date d = null;
 
-        for (Rechnung r : rechnungCollection) {
-            if (r.getEingang() != null) {
-                if (d == null) {
-                    d = r.getEingang();
-                } else {
-                    if (d.before(r.getEingang())) {
+    public Date getLetzteZahlung() {
+        if (letztezahlung == null) {
+            Date d = null;
+
+            for (Rechnung r : rechnungCollection) {
+                if (r.getEingang() != null) {
+                    if (d == null) {
                         d = r.getEingang();
+                    } else {
+                        if (d.before(r.getEingang())) {
+                            d = r.getEingang();
+                        }
                     }
                 }
             }
+            return d;
+        } else {
+            return letztezahlung;
         }
-        return d;
-        
     }
     
-    public boolean isPassiv(){
-        
-       for(Vertrag vertrag: vertragCollection){
-           if(vertrag.getAktiv())
-               return false;
-       }
-       return true;
+    public void setLetzteZahlung(Date letzteZahlung){
+        this.letztezahlung = letzteZahlung;
     }
 
+    public boolean isPassiv() {
+
+        for (Vertrag vertrag : vertragCollection) {
+            if (vertrag.getAktiv()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
